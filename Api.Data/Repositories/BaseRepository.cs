@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Threading.Tasks;
 using Api.Data.Context;
 using Api.Domain.Entities;
@@ -26,15 +27,15 @@ namespace Api.Data.Repositories
             try
             {
                 var result = await _dataset.AsNoTracking().SingleOrDefaultAsync(p => p.Id.Equals(id));
-                if (result == null) return false;
+                if (result == null) throw new Exception($"O Id {id} não foi encontrado");
 
                 _dataset.Remove(result);
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                throw;
+                throw new ArgumentException($" Não foi possível excluir com o Id {id}", e.Message);
             }
         }
 
@@ -57,9 +58,9 @@ namespace Api.Data.Repositories
                 await _context.SaveChangesAsync();
 
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                throw;
+                throw new ArgumentException($"Erro ao salvar arquivo", e.Message);
             }
             return item;
         }
@@ -68,11 +69,17 @@ namespace Api.Data.Repositories
         {
             try
             {
-                return await _dataset.AsNoTracking().SingleOrDefaultAsync(p => p.Id.Equals(id));
+                var result = await _dataset.AsNoTracking().SingleOrDefaultAsync(p => p.Id.Equals(id));
+
+                if (result is null)
+                {
+                    throw new Exception($"O item com o Id {id} não foi encontrado");
+                }
+                return result;
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                throw;
+                throw new ArgumentException($"Erro ao localizar item com o Id {id}", e.Message);
             }
         }
 
@@ -82,9 +89,9 @@ namespace Api.Data.Repositories
             {
                 return await _dataset.AsNoTracking().ToListAsync();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                throw;
+                throw new ArgumentException("Erro ao localizar os itens", e.Message);
             }
         }
 
@@ -93,7 +100,7 @@ namespace Api.Data.Repositories
             try
             {
                 var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(item.Id));
-                if (result == null) return null;
+                if (result == null) throw new Exception($"Erro ao atualizar/localizar o item com o Id {item.Id}");
 
                 item.UpdatedAt = DateTime.UtcNow;
                 item.CreatedAt = result.CreatedAt;
@@ -101,9 +108,9 @@ namespace Api.Data.Repositories
                 _context.Entry(result).CurrentValues.SetValues(item);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (ArgumentException e)
             {
-                throw;
+                throw new ArgumentException($"Erro ao atualizar o item com o Id {item.Id}", e.Message);
             }
             return item;
         }
@@ -115,9 +122,9 @@ namespace Api.Data.Repositories
                 var count = _dataset.Count();
                 return await _dataset.AsNoTracking().Skip(skip > 0 ? ((skip - 1) * take) : 0).Take(take).ToListAsync();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                throw;
+                throw new ArgumentException("Erro ao localizar itens com paginação", e.Message);
             }
         }
     }

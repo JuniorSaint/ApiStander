@@ -17,9 +17,13 @@
     <None Remove="AutoMapper" />
     <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
     <None Remove="Microsoft.Extensions.DependencyInjection" />
+    <None Remove="Resources\" />
+    <None Remove="Resources\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Images\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Api.Application\Api.Application.csproj">

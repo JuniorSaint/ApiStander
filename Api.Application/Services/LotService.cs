@@ -35,11 +35,6 @@ namespace Api.Application.Services
             return _mapper.Map<IEnumerable<LotDto>>(listEntity);
         }
 
-        public Task<LotDto> GetLotByEventLot(Guid eventId, Guid loteId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<LotDto> Post(LotCreateDto lote)
         {
             var entity = _mapper.Map<LotEntity>(lote);
@@ -47,11 +42,11 @@ namespace Api.Application.Services
             return _mapper.Map<LotDto>(result);
         }
 
-        public async Task<IEnumerable<LotDto>> Put(Guid idEvent, LotUpdateDto lotes)
+        public async Task<LotDto> Put(LotUpdateDto lot)
         {
-            var entity = _mapper.Map<LotEntity>(lotes);
-            var result = await _repository.UpdateLotAsync(idEvent, entity);
-            return _mapper.Map<IEnumerable<LotDto>>(result);
+            var entity = _mapper.Map<LotEntity>(lot);
+            var result = await _repository.UpdateLotAsync(entity);
+            return _mapper.Map<LotDto>(result);
         }
 
         public async Task<IEnumerable<LotDto>> GetAll()
@@ -66,22 +61,7 @@ namespace Api.Application.Services
             return _mapper.Map<IEnumerable<LotDto>>(listEntity);
         }
 
-        public Task<IEnumerable<LotDto>> GetLotByEvent(Guid idEvent)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<LotDto>> GetAllComplete()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<LotDto> ILotService.Put(Guid idEvent, LotUpdateDto lote)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<IEnumerable<LotDto>> ILotService.GetLotByEventLot(Guid eventId, Guid loteId)
+        Task<IEnumerable<LotDto>> ILotService.GetLotByEventLotAsync(Guid eventId, Guid loteId)
         {
             throw new NotImplementedException();
         }

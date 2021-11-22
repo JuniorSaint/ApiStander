@@ -13,8 +13,6 @@ namespace Api.Data.EntityConfiguration
             builder.Property(e => e.Local).HasMaxLength(100).IsRequired();
             builder.Property(e => e.Theme).HasMaxLength(100).IsRequired();
             builder.Property(e => e.EventImage).HasMaxLength(40);
-            builder.Property(e => e.Local).HasMaxLength(40);
-            builder.Property(e => e.Local).HasMaxLength(50);
             builder.HasMany(e => e.Lots).WithOne(e => e.Event).OnDelete(DeleteBehavior.Cascade);
             builder.HasMany(e => e.SocialMedias).WithOne(e => e.Event).OnDelete(DeleteBehavior.Cascade);
         }

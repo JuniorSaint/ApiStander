@@ -17,6 +17,8 @@ namespace Api.Application.Dtos.Speaker
         [Phone]
         public string SpeakerPhone { get; set; }
 
+        public DateTime? Birthday { get; set; }
+
         [Required(ErrorMessage = "Enviar para é obrigatório")]
         [RegularExpression(@"[a-z A-Z 0-9 _ \-\.]+[@]+[a-z]+[\.][a-z]{2,3}", ErrorMessage = "Campo email com formato inválido")]
         public string SpeakerEmail { get; set; }

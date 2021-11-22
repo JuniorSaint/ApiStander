@@ -7,16 +7,15 @@ namespace Api.Application.Dtos.Event
 {
     public class EventUpdateDto
     {
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public Guid Id { get; set; }
 
         [Display(Name = "Local do Evento"),
          Required(ErrorMessage = "O campo {0} é obrigtório.")]
         public string Local { get; set; }
 
-        [Display(Name = "Data do Evento"),
-         Required(ErrorMessage = "O campo {0} é obrigtório.")]
-        public DateTime EventDate { get; set; }
+        [Display(Name = "Data do Evento")]
+        //[Required(ErrorMessage = "O campo {0} é obrigtório.")]
+        public DateTime? EventDate { get; set; }
 
         [Display(Name = "Hora do Evento"),
          Required(ErrorMessage = "O campo {0} é obrigtório.")]

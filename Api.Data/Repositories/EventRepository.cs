@@ -18,7 +18,7 @@ namespace Api.Data.Repositories
         {
             try
             {
-                return await _dataset.Where(x => x.Theme == theme).Include(x => x.Speakers).ToListAsync();
+                return await _dataset.Where(x => x.Theme.ToLower().Contains(theme.ToLower())).Include(x => x.Speakers).ToListAsync();
             }
             catch (ArgumentException)
             {
@@ -35,6 +35,18 @@ namespace Api.Data.Repositories
             catch (ArgumentException)
             {
                 throw;
+            }
+        }
+
+        public async Task<IEnumerable<EventEntity>> GetAllCompleteAsync(Guid id)
+        {
+            try
+            {
+                return await _dataset.Where(x => x.Id == id).Include(x => x.Lots).ToListAsync();
+            }
+            catch (Exception)
+            {
+                throw new Exception("não há itens a serem listados");
             }
         }
     }

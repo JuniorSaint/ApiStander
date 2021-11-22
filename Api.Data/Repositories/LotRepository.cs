@@ -51,11 +51,11 @@ namespace Api.Data.Repositories
             }
         }
 
-        public async Task<LotEntity> UpdateLotAsync(Guid idEvent, LotEntity item)
+        public async Task<LotEntity> UpdateLotAsync(LotEntity item)
         {
             try
             {
-                var result = await _dataset.SingleOrDefaultAsync(p => p.EventId.Equals(idEvent));
+                var result = await _dataset.SingleOrDefaultAsync(p => p.Id == item.Id);
                 if (result is null) return null;
 
                 _context.Entry(result).CurrentValues.SetValues(item);

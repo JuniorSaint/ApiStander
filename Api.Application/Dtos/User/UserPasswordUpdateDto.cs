@@ -5,7 +5,7 @@ namespace Api.Application.Dtos.User
 {
     public class UserPasswordUpdateDto
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "e-mail"),
          Required(ErrorMessage = "O campo {0} é campo obrigatório"),

@@ -1,15 +1,13 @@
-﻿using System;
-using Api.Domain.Enum;
+﻿using Api.Domain.Enum;
 using Microsoft.AspNetCore.Identity;
 
-namespace Api.Domain.Entities
+namespace Api.Data.Identity
 {
-    public class UserEntity : IdentityUser<Guid>
+    public class UserIdentity : IdentityUser
     {
         public string UserImage { get; set; }
         public IsActive IsActive { get; set; }
         public UserType UserType { get; set; }
-        public IEnumerable<UserRoleEntity> UserRoles { get; set; }
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using Api.Application.Dtos.Event;
+﻿using Api.Application.Dtos;
+using Api.Application.Dtos.Event;
 using Api.Application.Interfaces;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
@@ -71,6 +72,11 @@ namespace Api.Application.Services
         {
             var listPage = await _repository.SelectAllPageAsync(skip, take);
             return _mapper.Map<IEnumerable<EventDto>>(listPage);
+        }
+        public async Task<IEnumerable<EventDto>> GetAllComplete(Guid id)
+        {
+            var listEntity = await _repository.GetAllCompleteAsync(id);
+            return _mapper.Map<IEnumerable<EventDto>>(listEntity);
         }
     }
 }

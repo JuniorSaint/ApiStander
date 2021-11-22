@@ -6,7 +6,7 @@ namespace Api.Application.Dtos.Lot
 {
     public class LotDto
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         public string LotName { get; set; }
 

@@ -9,7 +9,7 @@ namespace Api.Domain.Interfaces
         Task<LotEntity> GetLotByEventAndLotAsync(Guid idEvent, Guid id);
         Task<IEnumerable<LotEntity>> GetAllLotCompleteAsync();
         Task<IEnumerable<LotEntity>> GetLotByEventAsync(Guid idEvent);
-        Task<LotEntity> UpdateLotAsync(Guid idEvent, LotEntity items);
+        Task<LotEntity> UpdateLotAsync(LotEntity lot);
     }
 }
 

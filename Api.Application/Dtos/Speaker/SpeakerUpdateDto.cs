@@ -18,6 +18,8 @@ namespace Api.Application.Dtos.Speaker
              ErrorMessage = "Não é uma imagem válida. (gif, jpg, jpeg, bmp ou png)")]
         public string SpeakerImage { get; set; }
 
+        public DateTime? Birthday { get; set; }
+
         [Phone]
         public string SpeakerPhone { get; set; }
 

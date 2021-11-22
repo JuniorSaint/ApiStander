@@ -6,7 +6,6 @@ namespace Api.Application.Dtos.User
 {
     public class UserUpdateDto
     {
-        [Required(ErrorMessage = "Campo Id é obrigatório")]
         public Guid Id { get; set; }
 
         [Display(Name = "Nome do usuário"),

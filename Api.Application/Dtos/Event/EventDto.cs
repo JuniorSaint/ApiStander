@@ -6,7 +6,7 @@ namespace Api.Application.Dtos.Event
 {
     public class EventDto
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Local { get; set; }
 

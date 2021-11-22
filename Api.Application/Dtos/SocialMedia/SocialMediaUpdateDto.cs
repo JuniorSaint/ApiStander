@@ -7,7 +7,6 @@ namespace Api.Application.Dtos.SocialMedia
 {
     public class SocialMediaUpdateDto
     {
-        [Required(ErrorMessage = "{0} é campo obrigatório")]
         public Guid Id { get; set; }
 
         [Display(Name = "Rede Social"),

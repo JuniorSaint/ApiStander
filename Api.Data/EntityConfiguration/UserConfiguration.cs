@@ -1,13 +1,14 @@
 ﻿using System;
+using Api.Data.Identity;
 using Api.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Api.Data.EntityConfiguration
 {
-    public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
+    public class UserConfiguration : IEntityTypeConfiguration<UserIdentity>
     {
-        public void Configure(EntityTypeBuilder<UserEntity> builder)
+        public void Configure(EntityTypeBuilder<UserIdentity> builder)
         {
             builder.HasKey(u => u.Id);
             builder.Property(u => u.UserName).IsRequired().HasMaxLength(20);

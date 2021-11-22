@@ -7,6 +7,7 @@ namespace Api.Domain.Interfaces
     {
         Task<IEnumerable<EventEntity>> GetAllEventByThemeAsync(string theme);
         Task<EventEntity> GetEventByIdAsync(Guid eventId);
+        Task<IEnumerable<EventEntity>> GetAllCompleteAsync(Guid id);
     }
 }
 

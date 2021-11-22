@@ -1,6 +1,10 @@
 ﻿using Api.Application.Interfaces;
 using Api.Application.Services;
 using Api.CrossCutting.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.FileProviders;
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +16,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Configure CORS
-builder.Services.AddCors(options => options.AddDefaultPolicy(builder =>
-    builder.AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+                          builder =>
+                          {
+                              builder.AllowAnyOrigin()
+                                     .AllowAnyHeader()
+                                     .AllowAnyMethod();
+                          });
+});
 
-// configure Dependency cyclicle
+// configure Dependency cyclicle, document inside document
 builder.Services.AddControllers().AddNewtonsoftJson(x =>
         x.SerializerSettings.ReferenceLoopHandling =
         Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -43,6 +52,14 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Resources")),
+    RequestPath = new PathString("/Resources")
+});
+// A configuração da Cors tem que ficar depois de: app.UseHttpsRedirection e app.UseRouting e antes de app.UseEndpoints
+app.UseCors(MyAllowSpecificOrigins);
 
 app.MapControllers();
 

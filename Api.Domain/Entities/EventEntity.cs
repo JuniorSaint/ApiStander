@@ -23,9 +23,6 @@ namespace Api.Domain.Entities
 
         public string Email { get; set; }
 
-        public Guid IdUser { get; set; }
-        public UserEntity User { get; set; }
-
         public IEnumerable<LotEntity> Lots { get; set; }
         public IEnumerable<SocialMediaEntity> SocialMedias { get; set; }
         public IEnumerable<SpeakerEventEntity> Speakers { get; set; }

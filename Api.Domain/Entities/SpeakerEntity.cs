@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Domain.Entities
 {
@@ -11,10 +12,20 @@ namespace Api.Domain.Entities
         public string SpeakerImage { get; set; }
         public string SpeakerPhone { get; set; }
         public string SpeakerEmail { get; set; }
-        public Guid IdUser { get; set; }
-        public UserEntity User { get; set; }
+        public DateTime Birthday { get; set; }
         public IEnumerable<SocialMediaEntity> SocialMedias { get; set; }
         public IEnumerable<SpeakerEventEntity> SpeakerEvents { get; set; }
+
+        [NotMapped]
+        private int _age { get; set; }
+        public int Age
+        {
+            get { return _age; }
+            set
+            {
+                _age = value;
+            }
+        }
     }
 }
 

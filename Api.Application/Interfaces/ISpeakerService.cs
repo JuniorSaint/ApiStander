@@ -1,4 +1,5 @@
-﻿using Api.Application.Dtos.Speaker;
+﻿using Api.Application.Dtos;
+using Api.Application.Dtos.Speaker;
 
 namespace Api.Application.Interfaces
 {

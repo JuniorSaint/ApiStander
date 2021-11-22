@@ -1,16 +1,18 @@
-﻿using Api.Application.Dtos.Event;
+﻿using Api.Application.Dtos;
+using Api.Application.Dtos.Event;
 
 namespace Api.Application.Interfaces
 {
     public interface IEventService
     {
+        Task<EventDto> Post(EventCreateDto usuario);
+        Task<EventDto> Put(EventUpdateDto usuario);
+        Task<bool> Delete(Guid id);
         Task<EventDto> Get(Guid id);
         Task<IEnumerable<EventDto>> GetAll();
-        Task<bool> Delete(Guid id);
-        Task<EventDto> Put(EventUpdateDto evento);
-        Task<EventDto> Post(EventCreateDto evento);
-        Task<EventDto> PostUpload(EventUpdateDto events, Guid id);
         Task<IEnumerable<EventDto>> GetAllPage(int skip, int take);
+        Task<IEnumerable<EventDto>> GetAllComplete(Guid id);
+        Task<EventDto> PostUpload(EventUpdateDto events, Guid id);
         Task<EventDto> GetAllByTheme(string theme);
         Task<EventDto> GetEventById(Guid eventId);
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Api.Data.Identity;
 using Api.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -7,10 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Api.Data.Context
 {
 
-    //public class ApplicationDbContext : IdentityDbContext<UserEntity, RoleEntity, Guid,
-    //                                             IdentityUserClaim<Guid>, UserRoleEntity, IdentityUserLogin<Guid>,
-    //                                             IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<UserIdentity>
 
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -22,11 +20,6 @@ namespace Api.Data.Context
         public DbSet<SocialMediaEntity> SocialMedias { get; set; }
         public DbSet<SpeakerEntity> Speakers { get; set; }
         public DbSet<SpeakerEventEntity> SpeakerEvents { get; set; }
-        public DbSet<RoleEntity> Roles { get; set; }
-        public DbSet<UserEntity> Users { get; set; }
-        public DbSet<UserRoleEntity> UserRoles { get; set; }
-
-
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
