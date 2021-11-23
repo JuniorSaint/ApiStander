@@ -17,15 +17,7 @@ namespace Api.Domain.Entities
         public IEnumerable<SpeakerEventEntity> SpeakerEvents { get; set; }
 
         [NotMapped]
-        private int _age { get; set; }
-        public int Age
-        {
-            get { return _age; }
-            set
-            {
-                _age = value;
-            }
-        }
+        public int Age { get; set; }
     }
 }
 

@@ -49,10 +49,10 @@ namespace Api.Application.Services
             return _mapper.Map<EventDto>(result);
         }
 
-        public async Task<EventDto> GetAllByTheme(string theme)
+        public async Task<IEnumerable<EventDto>> GetAllByTheme(string theme)
         {
             var entity = await _repository.GetAllEventByThemeAsync(theme);
-            return _mapper.Map<EventDto>(entity);
+            return _mapper.Map<IEnumerable<EventDto>>(entity);
         }
 
         public async Task<EventDto> GetEventById(Guid eventId)

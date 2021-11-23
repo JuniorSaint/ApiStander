@@ -1,5 +1,6 @@
 ﻿using Api.Application.Dtos.Event;
 using Api.Application.Dtos.SocialMedia;
+using Api.Data;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Application.Dtos.Speaker
@@ -17,6 +18,11 @@ namespace Api.Application.Dtos.Speaker
         public DateTime CreatedAt { get; }
         public DateTime? UpdatedAt { get; }
         public DateTime Birthday { get; set; }
-        public int Age { get; set; }
+        private int _age { get; set; }
+        public int Age
+        {
+            get { return _age; }
+            set { _age = new CalcAge(Birthday).AgeAlready(); }
+        }
     }
 }

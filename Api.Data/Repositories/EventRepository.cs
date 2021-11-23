@@ -18,7 +18,11 @@ namespace Api.Data.Repositories
         {
             try
             {
-                return await _dataset.Where(x => x.Theme.ToLower().Contains(theme.ToLower())).Include(x => x.Speakers).ToListAsync();
+                if (theme is null || theme.Length < 1)
+                {
+                    return await _dataset.AsNoTracking().ToListAsync();
+                }
+                return await _dataset.Where(x => x.Theme.ToLower().Contains(theme.ToLower())).ToListAsync();
             }
             catch (ArgumentException)
             {
@@ -49,6 +53,7 @@ namespace Api.Data.Repositories
                 throw new Exception("não há itens a serem listados");
             }
         }
+
     }
 }
 
