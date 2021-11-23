@@ -23,12 +23,16 @@ namespace Api.Data
 
             result = (now.Year - _enterDate.Year);
 
-            if (monthBirth < monthNow || (monthBirth == monthNow && dayBirth < nowDay))
+            if (monthBirth < monthNow)
             {
                 result = result - 1;
             }
+            //ifelse(monthBirth == monthNow && dayBirth < nowDay)
+            //    {
             return result;
         }
+
     }
 }
+
 

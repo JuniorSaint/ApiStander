@@ -18,11 +18,14 @@ namespace Api.Data.Repositories
         {
             try
             {
-                if (theme is null || theme.Length < 1)
-                {
-                    return await _dataset.AsNoTracking().ToListAsync();
-                }
-                return await _dataset.Where(x => x.Theme.ToLower().Contains(theme.ToLower())).ToListAsync();
+                //if (String.IsNullOrWhiteSpace(theme) || theme.Length < 1)
+                //{
+
+                //}
+
+                return await _dataset.AsNoTracking().ToListAsync();
+
+                //return await _dataset.Where(x => x.Theme.ToLower().Contains(theme.ToLower())).ToListAsync();
             }
             catch (ArgumentException)
             {
