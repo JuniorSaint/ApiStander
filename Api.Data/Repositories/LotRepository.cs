@@ -15,30 +15,6 @@ namespace Api.Data.Repositories
             _dataset = contex.Set<LotEntity>();
         }
 
-        public async Task<IEnumerable<LotEntity>> GetAllLotCompleteAsync()
-        {
-            try
-            {
-                return await _dataset.Include(l => l.Event).ToListAsync();
-            }
-            catch (ArgumentException)
-            {
-                throw;
-            }
-        }
-
-        public async Task<LotEntity> GetLotByEventAndLotAsync(Guid idEvent, Guid id)
-        {
-            try
-            {
-                return await _dataset.SingleOrDefaultAsync(x => x.EventId == idEvent && x.Id == id);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public async Task<IEnumerable<LotEntity>> GetLotByEventAsync(Guid idEvent)
         {
             try

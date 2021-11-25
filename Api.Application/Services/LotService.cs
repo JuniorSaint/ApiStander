@@ -48,23 +48,6 @@ namespace Api.Application.Services
             var result = await _repository.UpdateLotAsync(entity);
             return _mapper.Map<LotDto>(result);
         }
-
-        public async Task<IEnumerable<LotDto>> GetAll()
-        {
-            var listEntity = await _repository.SelectAllAsync();
-            return _mapper.Map<IEnumerable<LotDto>>(listEntity);
-        }
-
-        public async Task<IEnumerable<LotDto>> GetAllLotCompleteAsync()
-        {
-            var listEntity = await _repository.GetAllLotCompleteAsync();
-            return _mapper.Map<IEnumerable<LotDto>>(listEntity);
-        }
-
-        Task<IEnumerable<LotDto>> ILotService.GetLotByEventLotAsync(Guid eventId, Guid loteId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

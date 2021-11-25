@@ -30,6 +30,7 @@ namespace Api.CrossCutting.DependencyInjection
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<ILotRepository, LotRepository>();
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
         }
     }

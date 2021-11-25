@@ -15,21 +15,19 @@ namespace Api.Application.Services
 
         private IUserRepository _repository;
         private readonly IMapper _mapper;
-        private SignInManager<UserIdentity> _signIn;
-        private UserManager<UserIdentity> _userManager;
 
-        public UserService(IUserRepository repository, IMapper mapper, SignInManager<UserIdentity> signIn, UserManager<UserIdentity> userManager)
+        public UserService(IUserRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
-            _signIn = signIn;
-            _userManager = userManager;
+
         }
 
         public Task<UserDto> Post(UserCreateDto usuario)
         {
-            var identy = _mapper.Map<UserIdentity>(usuario);
-            throw new NotImplementedException();
+            var entity = _mapper.Map<UserIdentity>(usuario;
+            var result = await _repository.InsertAsync(entity);
+            return _mapper.Map<UserDto>(result);
         }
 
         public Task<UserUpdateResultDto> Put(UserUpdateDto usuario)
@@ -47,9 +45,10 @@ namespace Api.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<UserDto>> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var listEntity = await _repository.SelectAllAsync();
+            return _mapper.Map<IEnumerable<UserDto>>(listEntity);
         }
 
         public Task<IEnumerable<UserDto>> GetAllPage(int skip, int take)

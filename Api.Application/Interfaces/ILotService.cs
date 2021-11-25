@@ -12,11 +12,7 @@ namespace Api.Application.Interfaces
         Task<LotDto> Put(LotUpdateDto lot);
         Task<bool> Delete(Guid id);
         Task<LotDto> Get(Guid id);
-        Task<IEnumerable<LotDto>> GetAll();
-
         Task<IEnumerable<LotDto>> GetLotByEventAsync(Guid idEvent);
-        Task<IEnumerable<LotDto>> GetLotByEventLotAsync(Guid eventId, Guid loteId);
-        Task<IEnumerable<LotDto>> GetAllLotCompleteAsync();
     }
 }
 
