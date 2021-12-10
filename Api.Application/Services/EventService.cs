@@ -3,6 +3,7 @@ using Api.Application.Dtos.Event;
 using Api.Application.Interfaces;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
+using Api.Domain.Utilities;
 using AutoMapper;
 
 namespace Api.Application.Services
@@ -18,7 +19,7 @@ namespace Api.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<EventDto> Get(Guid id)
+        public async Task<EventDto> GetEventById(Guid id)
         {
             var entity = await _repository.SelectByIdAsync(id);
             return _mapper.Map<EventDto>(entity);
@@ -30,9 +31,11 @@ namespace Api.Application.Services
             return _mapper.Map<IEnumerable<EventDto>>(listEntity);
         }
 
-        public async Task<bool> Delete(Guid id)
+        public async Task<EventDto> Post(EventCreateDto evento)
         {
-            return await _repository.DeleteAsync(id);
+            var entity = _mapper.Map<EventEntity>(evento);
+            var result = await _repository.InsertAsync(entity);
+            return _mapper.Map<EventDto>(result);
         }
 
         public async Task<EventDto> Put(EventUpdateDto evento)
@@ -42,23 +45,29 @@ namespace Api.Application.Services
             return _mapper.Map<EventDto>(result);
         }
 
-        public async Task<EventDto> Post(EventCreateDto evento)
+        public async Task<bool> Delete(Guid id)
         {
-            var entity = _mapper.Map<EventEntity>(evento);
-            var result = await _repository.InsertAsync(entity);
-            return _mapper.Map<EventDto>(result);
+            return await _repository.DeleteAsync(id);
         }
 
-        public async Task<IEnumerable<EventDto>> GetAllByTheme(string theme)
+        public async Task<PageList<EventDto>> GetAllByTerm(PageParams pageParams)
         {
-            var entity = await _repository.GetAllEventByThemeAsync(theme);
-            return _mapper.Map<IEnumerable<EventDto>>(entity);
+            var entity = await _repository.GetEventByTermAsync(pageParams);
+            var result =  _mapper.Map<PageList<EventDto>>(entity);
+
+            // mapped and fix the problem whit automapper with params
+            result.CurrentPage = entity.CurrentPage;
+            result.TotalPage = entity.TotalPage;
+            result.PageSize = entity.PageSize;
+            result.TotalCount = entity.TotalCount;
+
+            return result;
         }
 
-        public async Task<EventDto> GetEventById(Guid eventId)
+        public async Task<EventDto> GetByIdCompletInformation(Guid id)
         {
-            var entity = await _repository.GetEventByIdAsync(eventId);
-            return _mapper.Map<EventDto>(entity);
+            var listEntity = await _repository.GetAllCompleteAsync(id);
+            return _mapper.Map<EventDto>(listEntity);
         }
 
         public async Task<EventDto> PostUpload(EventUpdateDto evento, Guid id)
@@ -66,17 +75,6 @@ namespace Api.Application.Services
             var entity = _mapper.Map<EventEntity>(evento);
             var result = await _repository.UpdateAsync(entity);
             return _mapper.Map<EventDto>(result);
-        }
-
-        public async Task<IEnumerable<EventDto>> GetAllPage(int skip, int take)
-        {
-            var listPage = await _repository.SelectAllPageAsync(skip, take);
-            return _mapper.Map<IEnumerable<EventDto>>(listPage);
-        }
-        public async Task<IEnumerable<EventDto>> GetAllComplete(Guid id)
-        {
-            var listEntity = await _repository.GetAllCompleteAsync(id);
-            return _mapper.Map<IEnumerable<EventDto>>(listEntity);
         }
     }
 }

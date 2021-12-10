@@ -7,9 +7,9 @@ namespace Api.Data.Context
     public class ContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
         private static string Host = "localhost";
-        private static string User = "Junior";
+        private static string User = "postgres";
         private static string DBname = "ApiStander";
-        private static string Password = "123456";
+        private static string Password = "m2166446JR";
         private static string Port = "5432";
 
         public ApplicationDbContext CreateDbContext(string[] args)   // Usado para criar as migrations

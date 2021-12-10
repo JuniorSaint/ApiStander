@@ -1,4 +1,5 @@
-﻿using Api.Application.Interfaces;
+﻿using System.Text.Json.Serialization;
+using Api.Application.Interfaces;
 using Api.Application.Services;
 using Api.CrossCutting.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -28,10 +29,13 @@ builder.Services.AddCors(options =>
 });
 
 // configure Dependency cyclicle, document inside document
-builder.Services.AddControllers().AddNewtonsoftJson(x =>
-        x.SerializerSettings.ReferenceLoopHandling =
-        Newtonsoft.Json.ReferenceLoopHandling.Ignore
-    );
+builder.Services.AddControllers()
+                    .AddJsonOptions(options =>
+                        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
+                    )
+                    .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    );
 
 // configure dependency Injection
 InjectionRepository.ConfigureDependenciesRepository(builder.Services);

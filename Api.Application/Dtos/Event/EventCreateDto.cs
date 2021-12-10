@@ -27,10 +27,8 @@ namespace Api.Application.Dtos.Event
          Required(ErrorMessage = "O campo {0} é obrigtório.")]
         [Range(1, 120000, ErrorMessage = "{0} não pode ser menor que 1 e maior que 120.000")]
         public int PeopleAmount { get; set; }
-
-        [RegularExpression(@".*\.(gif|jpe?g|bmp|png)$",
-         ErrorMessage = "Não é uma imagem válida. (gif, jpg, jpeg, bmp ou png)")]
-        public string EventImage { get; set; }
+        
+            public string? EventImage { get; set; }
 
         [Display(Name = "Telefone"),
             Required(ErrorMessage = "O campo {0} é obrigatório")]

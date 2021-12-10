@@ -12,9 +12,9 @@ namespace Api.CrossCutting.DependencyInjection
     public static class InjectionRepository
     {
         private static string Host = "localhost";
-        private static string User = "Junior";
+        private static string User = "postgres";
         private static string DBname = "ApiStander";
-        private static string Password = "123456";
+        private static string Password = "m2166446JR";
         private static string Port = "5432";
 
         public static void ConfigureDependenciesRepository(IServiceCollection services)
@@ -30,7 +30,7 @@ namespace Api.CrossCutting.DependencyInjection
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<ILotRepository, LotRepository>();
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IUserRepository, UserRepository>();
 
         }
     }

@@ -1,13 +1,21 @@
 ﻿using System;
+using System.Net;
+using System.Threading.Tasks;
+using Api.Application.Dtos.Event;
+using Api.Application.Dtos.Lot;
+using Api.Application.Interfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+
 namespace Api.Api.Controllers
 {
-    [Router("api/v1/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class LotsController : ControllerBase
     {
         private ILotService _service;
-        private readOnly IMapper _mapper;
-        public LotsController(IlotService service, IMapper mapper)
+        private readonly IMapper _mapper;
+        public LotsController(ILotService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
@@ -18,7 +26,7 @@ namespace Api.Api.Controllers
         {
             try
             {
-                return Ok(await _service.(idEvent));
+                return Ok(await _service.GetLotsByEventAsync(idEvent));
             }
             catch (ArgumentException e)
             {
@@ -26,33 +34,13 @@ namespace Api.Api.Controllers
             }
         }
 
-        //  [Authorize("Bearer")]
-        [HttpPost]
-        public async Task<ActionResult> Post([FromBody] EventCreateDto events)
-        {
-            try
-            {
-                var result = await _service.Post(events);
-                if (result != null)
-                {
-                    return Created(new Uri(Url.Link("GetEventWithId", new { id = result.Id })), result);
-                }
-
-                return BadRequest("Não foram encontrado valores");
-            }
-            catch (ArgumentException ex)
-            {
-                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, ex.Message);
-            }
-        }
-
         //   [Authorize("Bearer")]
-        [HttpPut]
-        public async Task<ActionResult> Put([FromBody] EventUpdateDto events)
+        [HttpPut("{idEvent}")]
+        public async Task<ActionResult> Put([FromBody] IEnumerable<LotUpdateDto> lots,[FromRoute] Guid idEvent)
         {
             try
             {
-                var result = await _service.Put(events);
+                var result = await _service.SaveLotsAsync(lots, idEvent);
                 if (result != null)
                 {
                     return Ok(result);
@@ -69,17 +57,17 @@ namespace Api.Api.Controllers
         }
 
         //   [Authorize("Bearer")]
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete([FromRoute] Guid id)
+        [HttpDelete("{idEvent}/{idLot}")]
+        public async Task<ActionResult> Delete([FromRoute] Guid idLot,[FromRoute] Guid idEvent)
         {
             try
             {
-                var result = await _service.Get(id);
+                var result = await _service.GetLotByIdAsync(idLot, idEvent);
                 if (result == null)
                 {
-                    return NotFound($"Deleção não obteve êxito com Id: {id}");
+                    return NotFound($"Deleção não obteve êxito com Id: {idLot}");
                 }
-                return Ok(await _service.Delete(id));
+                return Ok(await _service.DeleteAsync(idLot));
             }
             catch (ArgumentException ex)
             {

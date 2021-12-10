@@ -1,6 +1,7 @@
 ﻿using Api.Data.Context;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
+using Api.Domain.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Data.Repositories
@@ -14,33 +15,22 @@ namespace Api.Data.Repositories
             _dataset = context.Set<EventEntity>();
         }
 
-        public async Task<IEnumerable<EventEntity>> GetAllEventByThemeAsync(string theme)
+        public async Task<PageList<EventEntity>> GetEventByTermAsync( PageParams pageParams)
         {
-            try
-            {
-                if (theme.TrimEnd() == "empty")
-                {
-                    return await _dataset.AsNoTracking().ToListAsync();
-                }
-                else
-                {
-                    return await _dataset.Where(x => x.Theme.ToLower().Contains(theme.ToLower())).ToListAsync();
+            IQueryable<EventEntity> query = _dataset.AsNoTracking()
+                         .Where(e => (e.Theme.ToLower().Contains(pageParams.term.ToLower()) ||
+                                      e.Local.ToLower().Contains(pageParams.term.ToLower())))
+                         .OrderBy(e => e.EventDate).OrderBy(e => e.EventDate);
 
-                }
-
-
-            }
-            catch (ArgumentException)
-            {
-                throw;
-            }
+            return await PageList<EventEntity>.CreateAsync(query, pageParams.PageNumber, pageParams.PageSize);
         }
+
 
         public async Task<EventEntity> GetEventByIdAsync(Guid eventId)
         {
             try
             {
-                return await _dataset.Include(x => x.Speakers).FirstOrDefaultAsync(x => x.Id.Equals(eventId));
+                return await _dataset.Include(x => x.Lots).FirstOrDefaultAsync(x => x.Id.Equals(eventId));
             }
             catch (ArgumentException)
             {
@@ -48,11 +38,11 @@ namespace Api.Data.Repositories
             }
         }
 
-        public async Task<IEnumerable<EventEntity>> GetAllCompleteAsync(Guid id)
+        public async Task<EventEntity> GetAllCompleteAsync(Guid id)
         {
             try
             {
-                return await _dataset.Where(x => x.Id == id).Include(x => x.Lots).ToListAsync();
+                return await _dataset.Include(x => x.Lots).FirstOrDefaultAsync(x => x.Id == id);
             }
             catch (Exception)
             {

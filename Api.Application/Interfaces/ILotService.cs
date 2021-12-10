@@ -8,11 +8,10 @@ namespace Api.Application.Interfaces
 {
     public interface ILotService
     {
-        Task<LotDto> Post(LotCreateDto lot);
-        Task<LotDto> Put(LotUpdateDto lot);
-        Task<bool> Delete(Guid id);
-        Task<LotDto> Get(Guid id);
-        Task<IEnumerable<LotDto>> GetLotByEventAsync(Guid idEvent);
+        Task<IEnumerable<LotDto>> SaveLotsAsync(IEnumerable<LotUpdateDto> lot, Guid idEvent);
+        Task<bool> DeleteAsync(Guid id);
+        Task<LotDto> GetLotByIdAsync(Guid id, Guid idEvent);
+        Task<IEnumerable<LotDto>> GetLotsByEventAsync(Guid idEvent);
     }
 }
 

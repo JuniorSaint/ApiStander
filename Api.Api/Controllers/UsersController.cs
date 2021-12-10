@@ -61,7 +61,7 @@ namespace Api.Api.Controllers
                 }
                 return Ok(await _service.Get(id));
 
-            }
+           }
             catch (ArgumentException e)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);

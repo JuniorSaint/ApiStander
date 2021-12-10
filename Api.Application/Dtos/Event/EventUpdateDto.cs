@@ -30,9 +30,7 @@ namespace Api.Application.Dtos.Event
         [Range(1, 120000, ErrorMessage = "{0} não pode ser menor que 1 e maior que 120.000")]
         public int PeopleAmount { get; set; }
 
-        [RegularExpression(@".*\.(gif|jpe?g|bmp|png)$",
-         ErrorMessage = "Não é uma imagem válida. (gif, jpg, jpeg, bmp ou png)")]
-        public string EventImage { get; set; }
+        public string? EventImage { get; set; }
 
         [Display(Name = "Telefone"),
             Required(ErrorMessage = "O campo {0} é obrigatório")]
@@ -48,9 +46,9 @@ namespace Api.Application.Dtos.Event
         [Display(Name = "Id do Usuário")]
         public Guid IdUser { get; set; }
 
-        public IEnumerable<LotDto> Lots { get; set; }
-        public IEnumerable<SocialMediaDto> socialMedias { get; set; }
-        public IEnumerable<SpeakerDto> Speakers { get; set; }
+        //public IEnumerable<LotDto> Lots { get; set; }
+        //public IEnumerable<SocialMediaDto> socialMedias { get; set; }
+        //public IEnumerable<SpeakerDto> Speakers { get; set; }
 
     }
 }

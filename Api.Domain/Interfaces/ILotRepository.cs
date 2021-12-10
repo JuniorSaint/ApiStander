@@ -6,8 +6,9 @@ namespace Api.Domain.Interfaces
 
     public interface ILotRepository : IRepository<LotEntity>
     {
-        Task<IEnumerable<LotEntity>> GetLotByEventAsync(Guid idEvent);
-        Task<LotEntity> UpdateLotAsync(LotEntity lot);
+        Task<LotEntity> GetLotById(Guid id, Guid idEvent);
+        Task<IEnumerable<LotEntity>> GetLotsByEventAsync(Guid idEvent);
+        Task<IEnumerable<LotEntity>> SaveLotsAsync(IEnumerable<LotEntity> lot, Guid idEvent);
     }
 }
 

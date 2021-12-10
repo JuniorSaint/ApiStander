@@ -7,7 +7,7 @@ namespace Api.Application.Dtos.Lot
 {
     public class LotUpdateDto
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         [Display(Name = "Nome do lote"),
          Required(ErrorMessage = "O campo {0} é obrigtório.")]

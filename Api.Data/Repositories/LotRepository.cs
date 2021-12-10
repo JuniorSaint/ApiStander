@@ -10,39 +10,50 @@ namespace Api.Data.Repositories
     {
         private DbSet<LotEntity> _dataset;
 
+
         public LotRepository(ApplicationDbContext contex) : base(contex)
         {
             _dataset = contex.Set<LotEntity>();
         }
 
-        public async Task<IEnumerable<LotEntity>> GetLotByEventAsync(Guid idEvent)
+        public async Task<LotEntity> GetLotById(Guid id, Guid idEvent)
         {
-            try
-            {
-                return await _dataset.Where(x => x.EventId.Equals(idEvent)).ToListAsync();
-            }
-            catch (ArgumentException)
-            {
-                throw;
-            }
+            var result = await _dataset.AsNoTracking().Where(x => x.Id == id && x.EventId == idEvent).SingleOrDefaultAsync();
+            return result;
         }
 
-        public async Task<LotEntity> UpdateLotAsync(LotEntity item)
+        public async Task<IEnumerable<LotEntity>> GetLotsByEventAsync(Guid idEvent)
+        {
+            var result = await _dataset.AsNoTracking().Where(x => x.EventId == idEvent).ToListAsync();
+            return result;
+        }
+
+        public async Task<IEnumerable<LotEntity>> SaveLotsAsync(IEnumerable<LotEntity> models, Guid idEvent)
         {
             try
             {
-                var result = await _dataset.SingleOrDefaultAsync(p => p.Id == item.Id);
-                if (result is null) return null;
+                foreach (var model in models)
+                {
+                    if (model.Id == Guid.Empty)
+                    {
+                        await InsertAsync(model);
+                    }
+                    else
+                    {
+                        var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(model.Id));
+                        if (result == null) throw new Exception($"Erro ao atualizar/localizar o item com o Id {model.Id}");
 
-                _context.Entry(result).CurrentValues.SetValues(item);
-                await _context.SaveChangesAsync();
-                return item;
+
+                        _context.Entry(result).CurrentValues.SetValues(model);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+             return   await GetLotsByEventAsync(idEvent);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message);
             }
-
         }
     }
 }

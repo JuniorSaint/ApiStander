@@ -1,4 +1,5 @@
-﻿using Api.Application.Dtos.Lot;
+﻿
+using Api.Application.Dtos.Lot;
 using Api.Application.Interfaces;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
@@ -18,35 +19,28 @@ namespace Api.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> Delete(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
             return await _repository.DeleteAsync(id);
         }
 
-        public async Task<LotDto> Get(Guid id)
+        public async Task<IEnumerable<LotDto>> SaveLotsAsync(IEnumerable<LotUpdateDto> lot, Guid idEvent)
         {
-            var entity = await _repository.SelectByIdAsync(id);
-            return _mapper.Map<LotDto>(entity);
+            var entity = _mapper.Map<IEnumerable<LotEntity>>(lot);
+            var result = await _repository.SaveLotsAsync(entity, idEvent);
+            return _mapper.Map<IEnumerable<LotDto>>(result);
         }
 
-        public async Task<IEnumerable<LotDto>> GetLotByEventAsync(Guid idEvent)
+        public async Task<LotDto> GetLotByIdAsync(Guid id, Guid idEvent)
         {
-            var listEntity = await _repository.GetLotByEventAsync(idEvent);
-            return _mapper.Map<IEnumerable<LotDto>>(listEntity);
-        }
-
-        public async Task<LotDto> Post(LotCreateDto lote)
-        {
-            var entity = _mapper.Map<LotEntity>(lote);
-            var result = await _repository.InsertAsync(entity);
+            var result = await _repository.GetLotById(id, idEvent);
             return _mapper.Map<LotDto>(result);
         }
 
-        public async Task<LotDto> Put(LotUpdateDto lot)
+        public async Task<IEnumerable<LotDto>> GetLotsByEventAsync(Guid idEvent)
         {
-            var entity = _mapper.Map<LotEntity>(lot);
-            var result = await _repository.UpdateLotAsync(entity);
-            return _mapper.Map<LotDto>(result);
+            var result = await _repository.GetLotsByEventAsync(idEvent);
+            return _mapper.Map<IEnumerable<LotDto>>(result);
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using Api.Api.Pagination;
 using Api.Application.Dtos.Event;
 using Api.Application.Interfaces;
+using Api.Domain.Utilities;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,27 +26,12 @@ namespace Api.Api.Controllers
         }
 
 
-        // [Authorize("Bearer")]
-        //[Authorize(Roles = "administrator")]
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
-        {
-            try
-            {
-                return Ok(await _service.GetAll());
-            }
-            catch (ArgumentException e)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
         [HttpGet("complete/{id}")]
         public async Task<ActionResult> GetAllComplete(Guid id)
         {
             try
             {
-                return Ok(await _service.GetAllComplete(id));
+                return Ok(await _service.GetByIdCompletInformation(id));
             }
             catch (Exception e)
             {
@@ -58,12 +45,20 @@ namespace Api.Api.Controllers
         {
             try
             {
-                var result = await _service.Get(id);
+                var result = await _service.GetEventById(id);
                 if (result == null)
                 {
                     return NotFound($"Deleção não obteve êxito com Id: {id}");
                 }
-                return Ok(await _service.Delete(id));
+
+                if (await _service.Delete(id))
+                {
+                    DeleteImage(result.EventImage);
+                    return Ok(await _service.Delete(id));
+                }
+                else {
+                     throw new Exception($"Erro ao deletar evento {result.Theme}");
+                }
             }
             catch (ArgumentException ex)
             {
@@ -71,27 +66,17 @@ namespace Api.Api.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("{skip}/{take}")]
-        public async Task<ActionResult> GetAllPage([FromRoute] int skip, [FromRoute] int take)
-        {
-            try
-            {
-                return Ok(await _service.GetAllPage(skip, take));
-            }
-            catch (Exception e)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
         // [Authorize("Bearer")]
-        [HttpGet("therm/{theme}")]
-        public async Task<ActionResult> GetAllByTherm([FromRoute] string theme)
+        [HttpGet]
+        public async Task<ActionResult> GetAllByTerm([FromQuery] PageParams pageParams)
         {
             try
             {
-                return Ok(await _service.GetAllByTheme(theme));
+                var result = await _service.GetAllByTerm(pageParams);
+                if (result == null) return NoContent();
+                Response.AddPagination(result.CurrentPage, result.PageSize, result.TotalCount, result.TotalPage);
+
+                return Ok(result);
             }
             catch (ArgumentException e)
             {
@@ -165,11 +150,12 @@ namespace Api.Api.Controllers
 
         //////////////////////  Updaload de imagem
         [HttpPost("updalod-image/{eventId}")]
-        public async Task<ActionResult> UploadImage(Guid id)
+        public async Task<ActionResult> UploadImage(Guid eventId)
         {
+    
             try
             {
-                var eventResult = await _service.GetEventById(id);
+                var eventResult = await _service.GetEventById(eventId);
                 if (eventResult is null) return NoContent();
 
                 var file = Request.Form.Files[0];

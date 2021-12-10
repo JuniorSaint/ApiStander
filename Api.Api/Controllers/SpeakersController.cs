@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Api.Application.Dtos.Speaker;
 using Api.Application.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 
 
 namespace Api.Api.Controllers
