@@ -10,8 +10,15 @@ namespace Api.Data.EntityConfiguration
         public void Configure(EntityTypeBuilder<SocialMediaEntity> builder)
         {
             builder.HasKey(s => s.Id);
-            builder.Property(s => s.URL).HasMaxLength(100).IsRequired();
+            builder.Property(s => s.UrlSocialMedia).HasMaxLength(100).IsRequired();
         }
     }
 }
+
+
+
+
+
+
+
 

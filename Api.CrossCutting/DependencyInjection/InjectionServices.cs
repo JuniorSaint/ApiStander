@@ -17,6 +17,7 @@ namespace Api.CrossCutting.DependencyInjection
             //services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUpLoadService, UploadService>();
             services.AddScoped<ISocialMediaService, SocialMediaService>();
+            services.AddScoped<IListSocialMediaService, ListSocialMediaService>();
 
 
             services.AddAutoMapper(typeof(EntityToDtoProfile));

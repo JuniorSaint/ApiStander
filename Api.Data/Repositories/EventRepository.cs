@@ -18,8 +18,11 @@ namespace Api.Data.Repositories
         public async Task<PageList<EventEntity>> GetEventByTermAsync( PageParams pageParams)
         {
             IQueryable<EventEntity> query = _dataset.AsNoTracking()
-                         .Where(e => (e.Theme.ToLower().Contains(pageParams.term.ToLower()) ||
-                                      e.Local.ToLower().Contains(pageParams.term.ToLower())))
+                         .Where(e => (
+                                        e.Theme.ToLower().Contains(pageParams.term.ToLower()) ||
+                                        e.Local.ToLower().Contains(pageParams.term.ToLower())
+                                      )
+                                )
                          .OrderBy(e => e.EventDate).OrderBy(e => e.EventDate);
 
             return await PageList<EventEntity>.CreateAsync(query, pageParams.PageNumber, pageParams.PageSize);

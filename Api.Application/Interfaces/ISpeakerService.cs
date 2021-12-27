@@ -8,9 +8,8 @@ namespace Api.Application.Interfaces
         Task<SpeakerDto> Post(SpeakerCreateDto speaker);
         Task<SpeakerDto> Put(SpeakerUpdateDto speaker);
         Task<bool> Delete(Guid id);
-        Task<SpeakerDto> Get(Guid id);
+        Task<SpeakerDto> GetById(Guid id);
         Task<IEnumerable<SpeakerDto>> GetAll();
-        Task<IEnumerable<SpeakerDto>> GetAllPage(int skip, int take);
     }
 }
 

@@ -7,7 +7,7 @@ namespace Api.Domain.Entities
     {
         public string SocialMedia { get; set; }
 
-        public string URL { get; set; }
+        public string UrlSocialMedia { get; set; }
 
         public Guid? EventId { get; set; }
         public EventEntity Event { get; set; }

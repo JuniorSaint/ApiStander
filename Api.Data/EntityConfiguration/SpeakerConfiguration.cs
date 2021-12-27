@@ -11,7 +11,7 @@ namespace Api.Data.EntityConfiguration
         {
             builder.HasKey(t => t.Id);
             builder.Property(p => p.SpeakerName).HasMaxLength(100).IsRequired();
-            builder.Property(p => p.MiniResume).HasMaxLength(300).IsRequired();
+            builder.Property(p => p.MiniResume).HasMaxLength(300);
             builder.Property(p => p.SpeakerImage).HasMaxLength(30);
             builder.Property(p => p.SpeakerPhone).HasMaxLength(20);
             builder.HasMany(p => p.SocialMedias).WithOne(p => p.Speaker).OnDelete(DeleteBehavior.Cascade);

@@ -22,9 +22,9 @@ namespace Api.Application.Services
             return await _repository.DeleteAsync(id);
         }
 
-        public async Task<SpeakerDto> Get(Guid id)
+        public async Task<SpeakerDto> GetById(Guid id)
         {
-            var entity = await _repository.SelectByIdAsync(id);
+            var entity = await _repository.SelectByICompletedAsync(id);
             return _mapper.Map<SpeakerDto>(entity);
         }
 
@@ -46,12 +46,6 @@ namespace Api.Application.Services
             var entity = _mapper.Map<SpeakerEntity>(speaker);
             var result = await _repository.UpdateAsync(entity);
             return _mapper.Map<SpeakerDto>(result);
-        }
-
-        public async Task<IEnumerable<SpeakerDto>> GetAllPage(int skip, int take)
-        {
-            var listPage = await _repository.SelectAllPageAsync(skip, take);
-            return _mapper.Map<IEnumerable<SpeakerDto>>(listPage);
         }
     }
 }

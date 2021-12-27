@@ -14,18 +14,20 @@
     <None Remove="System.IdentityModel.Tokens.Jwt" />
     <None Remove="AutoMapper" />
     <None Remove="Microsoft.AspNetCore.Http.Features" />
+    <None Remove="Dtos\ListSocialMedia\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
     <Folder Include="Dtos\" />
     <Folder Include="Mappings\" />
+    <Folder Include="Dtos\ListSocialMedia\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.13" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Api.Domain\Api.Domain.csproj" />

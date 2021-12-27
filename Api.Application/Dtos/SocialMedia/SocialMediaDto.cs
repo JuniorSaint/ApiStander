@@ -12,7 +12,7 @@ namespace Api.Application.Dtos.SocialMedia
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string SocialMedia { get; set; }
 
-        public string URL { get; set; }
+        public string UrlSocialMedia { get; set; }
 
         public Guid? EventId { get; set; }
         public EventDto Event { get; set; }

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Api.Api.Pagination;
 using Api.Application.Dtos.Event;
 using Api.Application.Interfaces;
 using Api.Domain.Utilities;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Api.Controllers
 {

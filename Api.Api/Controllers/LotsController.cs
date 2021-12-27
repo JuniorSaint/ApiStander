@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Api.Application.Dtos.Event;
 using Api.Application.Dtos.Lot;
 using Api.Application.Interfaces;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace Api.Api.Controllers
 {

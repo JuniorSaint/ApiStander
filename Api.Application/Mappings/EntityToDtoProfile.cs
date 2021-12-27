@@ -1,4 +1,5 @@
 ﻿using Api.Application.Dtos.Event;
+using Api.Application.Dtos.ListSocialMedia;
 using Api.Application.Dtos.Lot;
 using Api.Application.Dtos.SocialMedia;
 using Api.Application.Dtos.Speaker;
@@ -44,6 +45,10 @@ namespace Api.CrossCutting.Mappings
             CreateMap<SpeakerDto, SpeakerEntity>().ReverseMap();
             CreateMap<SpeakerCreateDto, SpeakerEntity>().ReverseMap();
             CreateMap<SpeakerUpdateDto, SpeakerEntity>().ReverseMap();
+            #endregion
+
+            #region ListSocialMedia Dto
+            CreateMap<ListSocialMediaDto, ListSocialMediaEntity>().ReverseMap();
             #endregion
         }
     }

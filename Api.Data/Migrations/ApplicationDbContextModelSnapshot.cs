@@ -17,7 +17,7 @@ namespace Api.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -31,7 +31,6 @@ namespace Api.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
@@ -93,14 +92,7 @@ namespace Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("UserIdentity");
                 });
 
             modelBuilder.Entity("Api.Domain.Entities.EventEntity", b =>
@@ -146,7 +138,206 @@ namespace Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Events");
+                    b.ToTable("EventEntity");
+                });
+
+            modelBuilder.Entity("Api.Domain.Entities.ListSocialMediaEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("SocialMediaName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ListSocialMediaEntity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("835427f0-e8f3-4eba-8fb4-be0f1f62ad66"),
+                            SocialMediaName = "Facebook"
+                        },
+                        new
+                        {
+                            Id = new Guid("0bb53dfc-edd9-4334-b91d-5f83d7c01790"),
+                            SocialMediaName = "Instagram"
+                        },
+                        new
+                        {
+                            Id = new Guid("750e0ada-6a8d-40fd-8f1c-f8c568a5f908"),
+                            SocialMediaName = "Gettr"
+                        },
+                        new
+                        {
+                            Id = new Guid("f300af93-b4c6-40de-8a58-9334c0c68a25"),
+                            SocialMediaName = "Telegram"
+                        },
+                        new
+                        {
+                            Id = new Guid("d872986f-0b4b-4f2d-90b9-29efdc02d1c4"),
+                            SocialMediaName = "WeChat"
+                        },
+                        new
+                        {
+                            Id = new Guid("9e97a4f5-7a9d-42df-a2c3-33186255e758"),
+                            SocialMediaName = "QZone"
+                        },
+                        new
+                        {
+                            Id = new Guid("84e932d0-09ea-4adf-8756-623953d5750c"),
+                            SocialMediaName = "Tumblr"
+                        },
+                        new
+                        {
+                            Id = new Guid("519cfcf1-5efa-4f64-a778-c6bc09b8ea1d"),
+                            SocialMediaName = "Twitter"
+                        },
+                        new
+                        {
+                            Id = new Guid("1530bfdf-9c22-416b-9787-ea9f09366af2"),
+                            SocialMediaName = "Google+"
+                        },
+                        new
+                        {
+                            Id = new Guid("21da8b6c-d49c-448a-aed1-49f29a58411f"),
+                            SocialMediaName = "Skype"
+                        },
+                        new
+                        {
+                            Id = new Guid("f5935f0e-cdb7-4d91-a912-e057e9d64987"),
+                            SocialMediaName = "Viber"
+                        },
+                        new
+                        {
+                            Id = new Guid("5a43a259-84b7-4a8f-9706-9ddb3b38f2ad"),
+                            SocialMediaName = "line"
+                        },
+                        new
+                        {
+                            Id = new Guid("3720e5ed-e5bf-42b6-8a7e-b089fdef01f9"),
+                            SocialMediaName = "Sina Weibo"
+                        },
+                        new
+                        {
+                            Id = new Guid("07cec255-3f6c-4d5a-8cad-4761ab3f7659"),
+                            SocialMediaName = "Snapchat"
+                        },
+                        new
+                        {
+                            Id = new Guid("4182ed6c-0fda-4ed4-a5e2-4355d12f4182"),
+                            SocialMediaName = "Pinterest"
+                        },
+                        new
+                        {
+                            Id = new Guid("1dca59a8-5b12-41fe-8fb7-173c813c1e5e"),
+                            SocialMediaName = "LinkedIn"
+                        },
+                        new
+                        {
+                            Id = new Guid("b1fd397a-7ff6-40b5-a4e4-9a808c1e523f"),
+                            SocialMediaName = "Reddit"
+                        },
+                        new
+                        {
+                            Id = new Guid("15d3309c-1536-4e1e-acc0-29298a03c799"),
+                            SocialMediaName = "Taringa"
+                        },
+                        new
+                        {
+                            Id = new Guid("23ed49af-c2cc-436a-a3d7-4e2835ac9dec"),
+                            SocialMediaName = "Foursquare"
+                        },
+                        new
+                        {
+                            Id = new Guid("12267324-0996-49fb-986a-78acf7527221"),
+                            SocialMediaName = "Badoo"
+                        },
+                        new
+                        {
+                            Id = new Guid("5800ce15-ebe5-4903-9010-db00d9c6486a"),
+                            SocialMediaName = "Myspace"
+                        },
+                        new
+                        {
+                            Id = new Guid("0f2e4538-c295-485c-9b6e-0e197ba0f8f2"),
+                            SocialMediaName = "YouTube"
+                        },
+                        new
+                        {
+                            Id = new Guid("3ddb80fe-c9a8-49c6-9fb6-d0011c15ceca"),
+                            SocialMediaName = "Upstream"
+                        },
+                        new
+                        {
+                            Id = new Guid("f54bfbc0-af0a-44ec-8c80-83f7f2976a90"),
+                            SocialMediaName = "MeetMe"
+                        },
+                        new
+                        {
+                            Id = new Guid("c89a7270-ffa5-4822-9b95-f88b788e1fc5"),
+                            SocialMediaName = "Vero"
+                        },
+                        new
+                        {
+                            Id = new Guid("0a96c1f3-f59f-4ade-be30-1e173420801c"),
+                            SocialMediaName = "TikTok"
+                        },
+                        new
+                        {
+                            Id = new Guid("d7daebf4-7d12-4bdd-968f-4d15e40606d3"),
+                            SocialMediaName = "WT Social"
+                        },
+                        new
+                        {
+                            Id = new Guid("09188b13-b2a2-4758-83b7-db033cf24287"),
+                            SocialMediaName = "Caffeine"
+                        },
+                        new
+                        {
+                            Id = new Guid("1c975d64-b90d-4be5-8fe1-0d03b5666b10"),
+                            SocialMediaName = "italki"
+                        },
+                        new
+                        {
+                            Id = new Guid("5f81856f-e4b9-4160-b665-6985a0e2fa13"),
+                            SocialMediaName = "Vimeo"
+                        },
+                        new
+                        {
+                            Id = new Guid("e38c3125-5535-4f44-8038-18f91635444a"),
+                            SocialMediaName = "Gab"
+                        },
+                        new
+                        {
+                            Id = new Guid("83cd3309-9727-4238-8d68-1bfa39f5705b"),
+                            SocialMediaName = "Rumble"
+                        },
+                        new
+                        {
+                            Id = new Guid("33edbe6b-ab83-4268-b2a8-a40e0d233259"),
+                            SocialMediaName = "Parler"
+                        },
+                        new
+                        {
+                            Id = new Guid("29a36971-5b6d-4e9b-9abb-f446b496d4fe"),
+                            SocialMediaName = "Odysee"
+                        },
+                        new
+                        {
+                            Id = new Guid("a0933bc7-8443-416e-aac0-763191dd1011"),
+                            SocialMediaName = "Github"
+                        });
                 });
 
             modelBuilder.Entity("Api.Domain.Entities.LotEntity", b =>
@@ -237,7 +428,6 @@ namespace Api.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("MiniResume")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("character varying(300)");
 
@@ -273,143 +463,16 @@ namespace Api.Data.Migrations
                     b.Property<Guid>("SpeakerId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("EventEntityId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("EventId", "SpeakerId");
+
+                    b.HasIndex("EventEntityId");
 
                     b.HasIndex("SpeakerId");
 
                     b.ToTable("SpeakerEvents");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("text");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("text");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Api.Domain.Entities.LotEntity", b =>
@@ -442,8 +505,12 @@ namespace Api.Data.Migrations
 
             modelBuilder.Entity("Api.Domain.Entities.SpeakerEventEntity", b =>
                 {
-                    b.HasOne("Api.Domain.Entities.EventEntity", "Event")
+                    b.HasOne("Api.Domain.Entities.EventEntity", null)
                         .WithMany("Speakers")
+                        .HasForeignKey("EventEntityId");
+
+                    b.HasOne("Api.Domain.Entities.ListSocialMediaEntity", "Event")
+                        .WithMany()
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -457,57 +524,6 @@ namespace Api.Data.Migrations
                     b.Navigation("Event");
 
                     b.Navigation("Speaker");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("Api.Data.Identity.UserIdentity", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("Api.Data.Identity.UserIdentity", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Api.Data.Identity.UserIdentity", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("Api.Data.Identity.UserIdentity", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Api.Domain.Entities.EventEntity", b =>

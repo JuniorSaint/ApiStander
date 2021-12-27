@@ -114,18 +114,5 @@ namespace Api.Data.Repositories
             }
             return item;
         }
-
-        public async Task<IEnumerable<T>> SelectAllPageAsync(int skip, int take)
-        {
-            try
-            {
-                var count = _dataset.Count();
-                return await _dataset.AsNoTracking().Skip(skip > 0 ? ((skip - 1) * take) : 0).Take(take).ToListAsync();
-            }
-            catch (ArgumentException e)
-            {
-                throw new ArgumentException("Erro ao localizar itens com paginação", e.Message);
-            }
-        }
     }
 }

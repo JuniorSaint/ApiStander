@@ -2,39 +2,46 @@
 
 using Api.Application.Dtos.SocialMedia;
 using Api.Application.Interfaces;
+using Api.Domain.Entities;
+using Api.Domain.Interfaces;
+using AutoMapper;
 
 namespace Api.Application.Services
 {
     public class SocialMediaService : ISocialMediaService
     {
-        public Task<bool> Delete(Guid id)
+        private ISocialMediaRepository _repository;
+        private readonly IMapper _mapper;
+
+        public SocialMediaService(ISocialMediaRepository repository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+            _mapper = mapper;
+        }
+           
+
+        public async Task<bool> Delete(Guid id)
+        {
+            return await _repository.DeleteAsync(id);
         }
 
-        public Task<SocialMediaDto> Get(Guid id)
+        public async Task<SocialMediaDto> GetSocialMediasBySpeakerBySocial(Guid idSpeaker, Guid idSocialMedia)
         {
-            throw new NotImplementedException();
+            var result = await _repository.GetSocialMediaSpeakerById(idSpeaker, idSocialMedia);
+            return _mapper.Map<SocialMediaDto>(result);
         }
 
-        public Task<IEnumerable<SocialMediaDto>> GetAll()
+        public async Task<IEnumerable<SocialMediaDto>> GetSocialMediasBySpeaker(Guid idSpeaker)
         {
-            throw new NotImplementedException();
+            var result = await _repository.GetAllBySpeaker(idSpeaker);
+            return _mapper.Map<IEnumerable<SocialMediaDto>>(result);
         }
 
-        public Task<IEnumerable<SocialMediaDto>> GetAllPage(int skip, int take)
+        public async Task<IEnumerable<SocialMediaDto>> SaveLotsAsync(IEnumerable<SocialMediaDto> socialMedia, Guid idSpeaker)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<SocialMediaDto> Post(SocialMediaCreateDto socialMedia)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<SocialMediaDto> Put(SocialMediaUpdateDto socialMedia)
-        {
-            throw new NotImplementedException();
+            var entity = _mapper.Map<IEnumerable<SocialMediaEntity>>(socialMedia);
+            var result = await _repository.SaveSocialMediaAsync(entity, idSpeaker);
+            return _mapper.Map<IEnumerable<SocialMediaDto>>(result);
         }
     }
 }

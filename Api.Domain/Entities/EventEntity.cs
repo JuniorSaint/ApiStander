@@ -28,4 +28,3 @@ namespace Api.Domain.Entities
         public IEnumerable<SpeakerEventEntity> Speakers { get; set; }
     }
 }
-

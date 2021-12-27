@@ -1,10 +1,11 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Api.Domain.Entities;
 
-namespace Api.Data.EntityConfiguration
-{
+namespace Api.Data.EntityConfiguration;
+
     public class EventConfiguration : IEntityTypeConfiguration<EventEntity>
     {
         public void Configure(EntityTypeBuilder<EventEntity> builder)
@@ -17,4 +18,3 @@ namespace Api.Data.EntityConfiguration
             builder.HasMany(e => e.SocialMedias).WithOne(e => e.Event).OnDelete(DeleteBehavior.Cascade);
         }
     }
-}
