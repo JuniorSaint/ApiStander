@@ -140,7 +140,6 @@ namespace Api.Api.Controllers
                 if (result is null) return NoContent();
 
                 var file = Request.Form.Files[0];
-                Console.WriteLine(file);
                 if (file.Length > 0)
                 {
                     DeleteImage(result.SpeakerImage);

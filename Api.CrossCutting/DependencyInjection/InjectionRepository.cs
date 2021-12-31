@@ -32,7 +32,7 @@ namespace Api.CrossCutting.DependencyInjection
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
             services.AddScoped<IListSocialMediaRepository, ListSocialMediaRepository>();
             services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
-            //services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
         }
     }

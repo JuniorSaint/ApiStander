@@ -3,7 +3,7 @@ using Api.Application.Dtos.Event;
 using Api.Application.Interfaces;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
-using Api.Domain.Utilities;
+using Api.Domain.Pagination;
 using AutoMapper;
 
 namespace Api.Application.Services

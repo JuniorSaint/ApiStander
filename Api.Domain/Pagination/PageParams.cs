@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Api.Domain.Utilities
+namespace Api.Domain.Pagination
 {
     public class PageParams
     {

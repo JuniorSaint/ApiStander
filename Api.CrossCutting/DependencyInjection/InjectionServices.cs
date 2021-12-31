@@ -14,10 +14,14 @@ namespace Api.CrossCutting.DependencyInjection
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<ILotService, LotService>();
             services.AddScoped<ISpeakerService, SpeakerService>();
-            //services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUpLoadService, UploadService>();
             services.AddScoped<ISocialMediaService, SocialMediaService>();
+            services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IListSocialMediaService, ListSocialMediaService>();
+     
+
+
 
 
             services.AddAutoMapper(typeof(EntityToDtoProfile));

@@ -4,7 +4,6 @@ using Api.Application.Dtos.Lot;
 using Api.Application.Dtos.SocialMedia;
 using Api.Application.Dtos.Speaker;
 using Api.Application.Dtos.User;
-using Api.Data.Identity;
 using Api.Domain.Entities;
 using AutoMapper;
 
@@ -16,10 +15,10 @@ namespace Api.CrossCutting.Mappings
         public EntityToDtoProfile()
         {
             #region User Dto
-            CreateMap<UserDto, UserIdentity>().ReverseMap();
-            CreateMap<UserCreateDto, UserIdentity>().ReverseMap();
-            CreateMap<UserUpdateDto, UserIdentity>().ReverseMap();
-            CreateMap<UserUpdateResultDto, UserIdentity>().ReverseMap();
+            CreateMap<UserDto, UserEntity>().ReverseMap();
+            CreateMap<UserCreateDto, UserEntity>().ReverseMap();
+            CreateMap<UserUpdateDto, UserEntity>().ReverseMap();
+            CreateMap<UserUpdateResultDto, UserEntity>().ReverseMap();
             #endregion
 
             #region Event Dto
@@ -45,6 +44,7 @@ namespace Api.CrossCutting.Mappings
             CreateMap<SpeakerDto, SpeakerEntity>().ReverseMap();
             CreateMap<SpeakerCreateDto, SpeakerEntity>().ReverseMap();
             CreateMap<SpeakerUpdateDto, SpeakerEntity>().ReverseMap();
+            CreateMap<SpeakerUpdateDto, SpeakerDto>().ReverseMap(); // mapping to update image
             #endregion
 
             #region ListSocialMedia Dto

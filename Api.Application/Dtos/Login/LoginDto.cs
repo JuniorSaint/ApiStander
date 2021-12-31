@@ -7,8 +7,7 @@ namespace Api.Application.Dtos.Login
     {
         [Display(Name = "e-mail"),
          Required(ErrorMessage = "O campo {0} é obrigatório para Login"),
-         StringLength(100, ErrorMessage = "Email deve ter no máximo {1} caracteres."),
-         RegularExpression(@"[a-z A-Z 0-9 _ \-\.]+[@]+[a-z]+[\.][a-z]{2,3}", ErrorMessage = "Campo email com formato inválido")]
+         StringLength(100, ErrorMessage = "Email deve ter no máximo {1} caracteres.")]
         public string Email { get; set; }
 
         [Display(Name = "senha"),

@@ -1,6 +1,6 @@
 ﻿using Api.Application.Dtos;
 using Api.Application.Dtos.Event;
-using Api.Domain.Utilities;
+using Api.Domain.Pagination;
 
 namespace Api.Application.Interfaces
 {

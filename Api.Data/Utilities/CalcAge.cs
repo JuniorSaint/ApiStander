@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Api.Domain.Utilities
+namespace Api.Data.Utilities
 {
     public class CalcAge
     {

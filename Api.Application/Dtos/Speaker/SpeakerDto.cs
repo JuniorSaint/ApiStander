@@ -1,7 +1,7 @@
 ﻿using Api.Application.Dtos.Event;
 using Api.Application.Dtos.SocialMedia;
 using Api.Data;
-using Api.Domain.Utilities;
+using Api.Data.Utilities;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Application.Dtos.Speaker

@@ -14,7 +14,6 @@ namespace Api.Application.Dtos.Event
         public string Local { get; set; }
 
         [Display(Name = "Data do Evento")]
-        //[Required(ErrorMessage = "O campo {0} é obrigtório.")]
         public DateTime? EventDate { get; set; }
 
         [Display(Name = "Hora do Evento"),

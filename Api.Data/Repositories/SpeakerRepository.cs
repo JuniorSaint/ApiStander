@@ -2,7 +2,7 @@
 using Api.Data.Context;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
-using Api.Domain.Utilities;
+using Api.Domain.Pagination;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Data.Repositories

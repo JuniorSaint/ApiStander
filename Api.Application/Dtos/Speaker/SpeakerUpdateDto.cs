@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Api.Domain.Entities;
 
 namespace Api.Application.Dtos.Speaker
 {
@@ -21,12 +22,11 @@ namespace Api.Application.Dtos.Speaker
 
         public DateTime? Birthday { get; set; }
 
-        [Required(ErrorMessage = "Enviar para é obrigatório")]    
         public string SpeakerEmail { get; set; }
 
-        //[Required(ErrorMessage = "O campo {0} é obrigatório")]
-        //[Display(Name = "Id do Usuário")]
-        //public Guid IdUser { get; set; }
+        public IEnumerable<SocialMediaEntity> SocialMedias { get; set; }
+
+        public IEnumerable<SpeakerEventEntity> SpeakerEvents { get; set; }
     }
 }
 

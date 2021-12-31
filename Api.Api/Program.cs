@@ -1,13 +1,16 @@
 ﻿using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.FileProviders;
 using Api.Application.Interfaces;
 using Api.Application.Services;
 using Api.CrossCutting.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.FileProviders;
+
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+
+ConfigurationManager configuration = builder.Configuration; //access appsetting.json
 
 /////////////////// Add services to the container. \\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -40,7 +43,7 @@ builder.Services.AddControllers()
 // configure dependency Injection
 InjectionRepository.ConfigureDependenciesRepository(builder.Services);
 InjectionService.ConfigureDependenciesService(builder.Services);
-//InjectionJwt.ConfigureDependenciesJwt(builder.Services);
+InjectionJwt.ConfigureDependenciesJwt(builder.Services, configuration);
 
 ///////////////////  Configure the HTTP request pipeline. \\\\\\\\\\\\\\\\\\\\\
 
@@ -55,6 +58,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStatusCodePages();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
 app.UseAuthorization();
 
 app.UseStaticFiles(new StaticFileOptions()
@@ -62,7 +71,8 @@ app.UseStaticFiles(new StaticFileOptions()
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Resources")),
     RequestPath = new PathString("/Resources")
 });
-// A configuração da Cors tem que ficar depois de: app.UseHttpsRedirection e app.UseRouting e antes de app.UseEndpoints
+// The configuration of the "Cors" must stay after: app.UseHttpsRedirection
+// and app.UseRouting and before app.UseEndpoints
 app.UseCors(MyAllowSpecificOrigins);
 
 app.MapControllers();

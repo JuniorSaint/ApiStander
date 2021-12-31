@@ -19,33 +19,6 @@ namespace Api.Api.Controllers
             _service = service;
         }
 
-        // [Authorize("Bearer")]
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
-        {
-            try
-            {
-                return Ok(await _service.GetAll());
-            }
-            catch (ArgumentException e)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("{skip}/{take}")]
-        public async Task<ActionResult> GetAllPage([FromRoute] int skip, [FromRoute] int take)
-        {
-            try
-            {
-                return Ok(await _service.GetAllPage(skip, take));
-            }
-            catch (Exception e)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
 
         // [Authorize("Bearer")]
         [HttpGet]
@@ -54,12 +27,12 @@ namespace Api.Api.Controllers
         {
             try
             {
-                var result = await _service.Get(id);
+                var result = await _service.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Pesquisa não obteve êxito com Id: {id}");
                 }
-                return Ok(await _service.Get(id));
+                return Ok(await _service.GetById(id));
 
            }
             catch (ArgumentException e)
@@ -117,7 +90,7 @@ namespace Api.Api.Controllers
         {
             try
             {
-                var result = await _service.Get(id);
+                var result = await _service.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Deleção não obteve êxito com Id: {id}");

@@ -11,7 +11,7 @@ namespace Api.Application.Dtos.User
          Required(ErrorMessage = "O campo {0} é campo obrigatório"),
          RegularExpression(@"[a-z A-Z 0-9 _ \-\.]+[@]+[a-z]+[\.][a-z]{2,3}", ErrorMessage = "Campo {0} com formato inválido"),
          MaxLength(100, ErrorMessage = "Número máximo de caractes {1} ")]
-        public string Email { get; set; }
+        public string UserEmail { get; set; }
 
         [Display(Name = "senha do usuário"),
          Required(ErrorMessage = "O campo {0} é campo obrigatório"),

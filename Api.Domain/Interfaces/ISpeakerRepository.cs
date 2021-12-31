@@ -1,6 +1,6 @@
 ﻿using System;
 using Api.Domain.Entities;
-using Api.Domain.Utilities;
+using Api.Domain.Pagination;
 
 namespace Api.Domain.Interfaces
 {

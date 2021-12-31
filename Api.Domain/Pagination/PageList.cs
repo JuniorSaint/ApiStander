@@ -2,7 +2,7 @@
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
 
-namespace Api.Domain.Utilities
+namespace Api.Domain.Pagination
 {
     public class PageList<T> : List<T>
     {

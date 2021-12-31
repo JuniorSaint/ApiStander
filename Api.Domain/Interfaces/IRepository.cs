@@ -1,5 +1,6 @@
 ﻿using Api.Domain.Entities;
 
+
 namespace Api.Domain.Interfaces
 {
     public interface IRepository<T> where T : BaseEntities
@@ -10,5 +11,6 @@ namespace Api.Domain.Interfaces
         Task<T> SelectByIdAsync(Guid id);
         Task<IEnumerable<T>> SelectAllAsync();
         Task<bool> ExistAsync(Guid id);
+     
     }
 }

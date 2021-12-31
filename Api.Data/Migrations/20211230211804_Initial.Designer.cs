@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Api.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211215140206_Initial")]
+    [Migration("20211230211804_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,79 +23,6 @@ namespace Api.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Api.Data.Identity.UserIdentity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("character varying(60)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("IsActive")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("NormalizedEmail")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("character varying(60)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("UserImage")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<int>("UserType")
-                        .HasMaxLength(20)
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserIdentity");
-                });
 
             modelBuilder.Entity("Api.Domain.Entities.EventEntity", b =>
                 {
@@ -140,7 +67,7 @@ namespace Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EventEntity");
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("Api.Domain.Entities.ListSocialMediaEntity", b =>
@@ -162,182 +89,182 @@ namespace Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ListSocialMediaEntity");
+                    b.ToTable("ListSocialMedias");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("835427f0-e8f3-4eba-8fb4-be0f1f62ad66"),
+                            Id = new Guid("c889da3c-22f0-4ee4-b3a0-3e00708f5064"),
                             SocialMediaName = "Facebook"
                         },
                         new
                         {
-                            Id = new Guid("0bb53dfc-edd9-4334-b91d-5f83d7c01790"),
+                            Id = new Guid("a951494c-b327-4bab-b42e-6c0a9dca8270"),
                             SocialMediaName = "Instagram"
                         },
                         new
                         {
-                            Id = new Guid("750e0ada-6a8d-40fd-8f1c-f8c568a5f908"),
+                            Id = new Guid("cb71d345-582e-49de-8457-802ff7916c77"),
                             SocialMediaName = "Gettr"
                         },
                         new
                         {
-                            Id = new Guid("f300af93-b4c6-40de-8a58-9334c0c68a25"),
+                            Id = new Guid("52f47efe-628b-4df0-8e28-c49d9cac9d78"),
                             SocialMediaName = "Telegram"
                         },
                         new
                         {
-                            Id = new Guid("d872986f-0b4b-4f2d-90b9-29efdc02d1c4"),
+                            Id = new Guid("587a5277-78bb-40b7-9147-11093a5fdc27"),
                             SocialMediaName = "WeChat"
                         },
                         new
                         {
-                            Id = new Guid("9e97a4f5-7a9d-42df-a2c3-33186255e758"),
+                            Id = new Guid("ac0d56e4-f7ea-4608-a826-8a2c3a348344"),
                             SocialMediaName = "QZone"
                         },
                         new
                         {
-                            Id = new Guid("84e932d0-09ea-4adf-8756-623953d5750c"),
+                            Id = new Guid("d49e60d3-0a1c-4e6e-b4a5-5042b010406c"),
                             SocialMediaName = "Tumblr"
                         },
                         new
                         {
-                            Id = new Guid("519cfcf1-5efa-4f64-a778-c6bc09b8ea1d"),
+                            Id = new Guid("1c1cc05e-ce3a-4352-8134-31e0b56007a3"),
                             SocialMediaName = "Twitter"
                         },
                         new
                         {
-                            Id = new Guid("1530bfdf-9c22-416b-9787-ea9f09366af2"),
+                            Id = new Guid("498833e8-8cb4-4fda-9124-7ee4726295e1"),
                             SocialMediaName = "Google+"
                         },
                         new
                         {
-                            Id = new Guid("21da8b6c-d49c-448a-aed1-49f29a58411f"),
+                            Id = new Guid("29042f90-2df2-4b32-bdbe-4097c647366b"),
                             SocialMediaName = "Skype"
                         },
                         new
                         {
-                            Id = new Guid("f5935f0e-cdb7-4d91-a912-e057e9d64987"),
+                            Id = new Guid("78aa886b-545e-42f2-8f72-ee825eb8a46c"),
                             SocialMediaName = "Viber"
                         },
                         new
                         {
-                            Id = new Guid("5a43a259-84b7-4a8f-9706-9ddb3b38f2ad"),
+                            Id = new Guid("ec872165-bf74-47e7-b6d7-78e11559d53e"),
                             SocialMediaName = "line"
                         },
                         new
                         {
-                            Id = new Guid("3720e5ed-e5bf-42b6-8a7e-b089fdef01f9"),
+                            Id = new Guid("be57d109-c83e-475f-998c-97586d324b21"),
                             SocialMediaName = "Sina Weibo"
                         },
                         new
                         {
-                            Id = new Guid("07cec255-3f6c-4d5a-8cad-4761ab3f7659"),
+                            Id = new Guid("6b639348-b483-4e2d-bfcd-2715e4179ea2"),
                             SocialMediaName = "Snapchat"
                         },
                         new
                         {
-                            Id = new Guid("4182ed6c-0fda-4ed4-a5e2-4355d12f4182"),
+                            Id = new Guid("2ede3eb6-3e78-47db-97a1-2a1fc94ea07e"),
                             SocialMediaName = "Pinterest"
                         },
                         new
                         {
-                            Id = new Guid("1dca59a8-5b12-41fe-8fb7-173c813c1e5e"),
+                            Id = new Guid("7e21aac0-f815-468e-901b-444ccd6781a3"),
                             SocialMediaName = "LinkedIn"
                         },
                         new
                         {
-                            Id = new Guid("b1fd397a-7ff6-40b5-a4e4-9a808c1e523f"),
+                            Id = new Guid("cc0a5955-08bc-4b93-9871-d6812c0db83a"),
                             SocialMediaName = "Reddit"
                         },
                         new
                         {
-                            Id = new Guid("15d3309c-1536-4e1e-acc0-29298a03c799"),
+                            Id = new Guid("7b8defbe-646d-4031-94b8-57961c07ccdf"),
                             SocialMediaName = "Taringa"
                         },
                         new
                         {
-                            Id = new Guid("23ed49af-c2cc-436a-a3d7-4e2835ac9dec"),
+                            Id = new Guid("e070cce7-ff24-4cdc-9b39-36dc8d64bf23"),
                             SocialMediaName = "Foursquare"
                         },
                         new
                         {
-                            Id = new Guid("12267324-0996-49fb-986a-78acf7527221"),
+                            Id = new Guid("3fc33bad-f465-48aa-8919-0f8cc119d29a"),
                             SocialMediaName = "Badoo"
                         },
                         new
                         {
-                            Id = new Guid("5800ce15-ebe5-4903-9010-db00d9c6486a"),
+                            Id = new Guid("8a82d2c6-9ae7-417e-8b19-f36b5ed6778f"),
                             SocialMediaName = "Myspace"
                         },
                         new
                         {
-                            Id = new Guid("0f2e4538-c295-485c-9b6e-0e197ba0f8f2"),
+                            Id = new Guid("47945d9d-5fd0-4642-859f-c205330b09eb"),
                             SocialMediaName = "YouTube"
                         },
                         new
                         {
-                            Id = new Guid("3ddb80fe-c9a8-49c6-9fb6-d0011c15ceca"),
+                            Id = new Guid("3f54d9b4-22ef-46ab-9abb-7bb4a56c6482"),
                             SocialMediaName = "Upstream"
                         },
                         new
                         {
-                            Id = new Guid("f54bfbc0-af0a-44ec-8c80-83f7f2976a90"),
+                            Id = new Guid("82f2daa9-ed11-45b6-8646-cc8bca3ab486"),
                             SocialMediaName = "MeetMe"
                         },
                         new
                         {
-                            Id = new Guid("c89a7270-ffa5-4822-9b95-f88b788e1fc5"),
+                            Id = new Guid("0a6a00e7-a3a1-48a1-a859-50528cb1927c"),
                             SocialMediaName = "Vero"
                         },
                         new
                         {
-                            Id = new Guid("0a96c1f3-f59f-4ade-be30-1e173420801c"),
+                            Id = new Guid("53eefe41-f282-44f7-a6c1-87762537a1c1"),
                             SocialMediaName = "TikTok"
                         },
                         new
                         {
-                            Id = new Guid("d7daebf4-7d12-4bdd-968f-4d15e40606d3"),
+                            Id = new Guid("af1b1374-4230-4600-a905-c1d8aa463a8b"),
                             SocialMediaName = "WT Social"
                         },
                         new
                         {
-                            Id = new Guid("09188b13-b2a2-4758-83b7-db033cf24287"),
+                            Id = new Guid("dbdd672a-c688-4999-a281-6540ebce79de"),
                             SocialMediaName = "Caffeine"
                         },
                         new
                         {
-                            Id = new Guid("1c975d64-b90d-4be5-8fe1-0d03b5666b10"),
+                            Id = new Guid("2353978e-c8b2-4b42-a189-34787ddecf44"),
                             SocialMediaName = "italki"
                         },
                         new
                         {
-                            Id = new Guid("5f81856f-e4b9-4160-b665-6985a0e2fa13"),
+                            Id = new Guid("74e705b9-ee1a-42e3-a1af-f60494343890"),
                             SocialMediaName = "Vimeo"
                         },
                         new
                         {
-                            Id = new Guid("e38c3125-5535-4f44-8038-18f91635444a"),
+                            Id = new Guid("b04dddbd-922e-4443-94c5-babcfe4bde3e"),
                             SocialMediaName = "Gab"
                         },
                         new
                         {
-                            Id = new Guid("83cd3309-9727-4238-8d68-1bfa39f5705b"),
+                            Id = new Guid("ff35d7d0-3b8a-46d6-9f73-deca0b04ce9e"),
                             SocialMediaName = "Rumble"
                         },
                         new
                         {
-                            Id = new Guid("33edbe6b-ab83-4268-b2a8-a40e0d233259"),
+                            Id = new Guid("3002e49a-70a0-418b-bda6-c994d998464c"),
                             SocialMediaName = "Parler"
                         },
                         new
                         {
-                            Id = new Guid("29a36971-5b6d-4e9b-9abb-f446b496d4fe"),
+                            Id = new Guid("25f88e15-0624-464a-b540-e064e8ce7f93"),
                             SocialMediaName = "Odysee"
                         },
                         new
                         {
-                            Id = new Guid("a0933bc7-8443-416e-aac0-763191dd1011"),
+                            Id = new Guid("10ab0383-ad73-438f-ae48-3511d18eff93"),
                             SocialMediaName = "Github"
                         });
                 });
@@ -400,13 +327,13 @@ namespace Api.Data.Migrations
                     b.Property<Guid?>("SpeakerId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("URL")
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UrlSocialMedia")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -475,6 +402,64 @@ namespace Api.Data.Migrations
                     b.HasIndex("SpeakerId");
 
                     b.ToTable("SpeakerEvents");
+                });
+
+            modelBuilder.Entity("Api.Domain.Entities.UserEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
+
+                    b.Property<string>("UserImage")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<string>("UserType")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4717560f-c9be-44b5-aa17-4d53effcb278"),
+                            IsActive = true,
+                            Password = "123456",
+                            Title = "Tecnologo",
+                            UserEmail = "junior.garbage@gmail.com",
+                            UserImage = "rosto.jpg",
+                            UserName = "Junior",
+                            UserType = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Api.Domain.Entities.LotEntity", b =>

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Api.Domain.Enum;
+
 
 namespace Api.Application.Dtos.User
 {
@@ -15,7 +15,7 @@ namespace Api.Application.Dtos.User
          Required(ErrorMessage = "O campo {0} é campo obrigatório"),
          RegularExpression(@"[a-z A-Z 0-9 _ \-\.]+[@]+[a-z]+[\.][a-z]{2,3}", ErrorMessage = "Campo {0} com formato inválido"),
          MaxLength(100, ErrorMessage = "Número máximo de caractes {1} ")]
-        public string Email { get; set; }
+        public string UserEmail { get; set; }
 
         [Display(Name = "senha do usuário"),
          Required(ErrorMessage = "O campo {0} é campo obrigatório"),
@@ -24,11 +24,18 @@ namespace Api.Application.Dtos.User
 
         [Display(Name = "usuário ativo"),
          Required(ErrorMessage = "O campo {0} é campo obrigatório")]
-        public IsActive IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         [Display(Name = "Tipo de usuário"),
          Required(ErrorMessage = "O campo {0} é campo obrigatório")]
-        public UserType UserType { get; set; }
+        public string UserType { get; set; }
+
+
+        public string UserImage { get; set; }
+
+        public string Title { get; set; }
+  
+    
     }
 }
 

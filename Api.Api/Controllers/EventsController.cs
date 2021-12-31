@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Api.Api.Pagination;
 using Api.Application.Dtos.Event;
 using Api.Application.Interfaces;
-using Api.Domain.Utilities;
+using Api.Domain.Pagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Api.Controllers
 {
@@ -65,7 +66,7 @@ namespace Api.Api.Controllers
             }
         }
 
-        // [Authorize("Bearer")]
+         [Authorize]
         [HttpGet]
         public async Task<ActionResult> GetAllByTerm([FromQuery] PageParams pageParams)
         {

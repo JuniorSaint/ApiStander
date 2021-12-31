@@ -13,6 +13,8 @@ namespace Api.Application.Dtos.SocialMedia
          Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string SocialMedia { get; set; }
 
+        [Display(Name = "Endereço da Social"),
+         Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string UrlSocialMedia { get; set; }
 
         public Guid? EventId { get; set; }

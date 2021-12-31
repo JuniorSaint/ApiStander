@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Api.Application.Dtos.Login;
 
-namespace Api.Applications.Interfaces
+namespace Api.Application.Interfaces
 {
     public interface ILoginService
     {

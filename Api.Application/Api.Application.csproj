@@ -15,6 +15,7 @@
     <None Remove="AutoMapper" />
     <None Remove="Microsoft.AspNetCore.Http.Features" />
     <None Remove="Dtos\ListSocialMedia\" />
+    <None Remove="Microsoft.IdentityModel.Tokens" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -28,6 +29,7 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.13" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.15.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Api.Domain\Api.Domain.csproj" />
