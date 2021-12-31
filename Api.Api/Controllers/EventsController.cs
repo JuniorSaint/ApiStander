@@ -66,7 +66,7 @@ namespace Api.Api.Controllers
             }
         }
 
-         [Authorize]
+         //[Authorize]
         [HttpGet]
         public async Task<ActionResult> GetAllByTerm([FromQuery] PageParams pageParams)
         {

@@ -20,10 +20,6 @@ namespace Api.CrossCutting.DependencyInjection
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IListSocialMediaService, ListSocialMediaService>();
      
-
-
-
-
             services.AddAutoMapper(typeof(EntityToDtoProfile));
         }
     }

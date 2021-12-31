@@ -1,22 +1,20 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
-using Api.Application.Dtos.Login;
-using Api.Application.Security;
-using Api.Application.Interfaces;
-using Api.Domain.Entities;
-using Api.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 using AutoMapper;
 using Api.Application.Dtos.User;
+using Api.Application.Dtos.Login;
+using Api.Application.Interfaces;
+using Api.Domain.Entities;
+using Api.Domain.Interfaces;
 
 namespace Api.Application.Services
 {
     public class LoginService : ILoginService
     {
-
         private IConfiguration _configuration { get; set; }
         private IUserRepository _repository;
         private IMapper _mapper;
@@ -40,7 +38,6 @@ namespace Api.Application.Services
                     {
                         authenticated = false,
                         message = $"email: {user.Email} e/ou senha esta errado ou usuário inativo"
-
                     };
                 }
                 else
@@ -78,8 +75,7 @@ namespace Api.Application.Services
                         );
                     var Token = new JwtSecurityTokenHandler().WriteToken(token);
 
-                    return SuccessObject(DateTime.UtcNow, expiration, Token, result);
-
+                    return SuccessObject(DateTime.UtcNow, expiration, Token);
                 }
             }
             else
@@ -88,7 +84,7 @@ namespace Api.Application.Services
             }
         }
 
-        private object SuccessObject(DateTime createDate, DateTime expirationDate, string token, UserDto user)
+        private object SuccessObject(DateTime createDate, DateTime expirationDate, string token)
         {
             return new
             {
