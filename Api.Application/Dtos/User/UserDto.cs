@@ -1,4 +1,5 @@
 ﻿using System;
+using Api.Data.Utilities;
 
 namespace Api.Application.Dtos.User
 {
@@ -13,6 +14,15 @@ namespace Api.Application.Dtos.User
         public DateTime? UpdatedAt { get; set; }
         public string UserImage { get; set; }
         public string Title { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime DateBirthday { get; set; }
+
+        private int _age { get; set; }
+        public int Age
+        {
+            get { return _age; }
+            set { _age = new CalcAge(DateBirthday).AgeAlready(); }
+        }
 
     }
 }

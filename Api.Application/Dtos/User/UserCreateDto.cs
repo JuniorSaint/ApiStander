@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace Api.Application.Dtos.User
 {
     public class UserCreateDto
@@ -30,12 +29,14 @@ namespace Api.Application.Dtos.User
          Required(ErrorMessage = "O campo {0} é campo obrigatório")]
         public string UserType { get; set; }
 
-
         public string UserImage { get; set; }
 
         public string Title { get; set; }
-  
-    
+
+        public string PhoneNumber { get; set; }
+
+        public DateTime? DateBirthday { get; set ; }     
+
     }
 }
 

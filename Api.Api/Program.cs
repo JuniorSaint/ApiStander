@@ -4,6 +4,9 @@ using Microsoft.Extensions.FileProviders;
 using Api.Application.Interfaces;
 using Api.Application.Services;
 using Api.CrossCutting.DependencyInjection;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +20,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
-
 
 // configure dependency Injection
 InjectionRepository.ConfigureDependenciesRepository(builder.Services);
@@ -47,7 +49,7 @@ app.UseRouting();
 // and app.UseRouting and before app.UseEndpoints
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin() );
 
-app.UseAuthorization();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

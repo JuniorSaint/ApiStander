@@ -9,12 +9,12 @@ namespace Api.Application.Interfaces
 {
     public interface IUserService
     {
-        Task<UserDto> Post(UserCreateDto usuario);
-        Task<UserUpdateResultDto> Put(UserUpdateDto usuario);
+        Task<UserDto> Post(UserCreateDto user);
+        Task<UserUpdateResultDto> Put(UserUpdateDto user);
         Task<bool> Delete(Guid id);
         Task<UserDto> GetById(Guid id);
+        Task<UserDto> GetByEmail(string email);
         Task<bool> PatchPassword(UserPasswordUpdateDto user);
-        Task<SignInResult> CheckUserPasswordAsync(LoginDto loginDto);
         Task<PageList<UserDto>> GetAllByTerm(PageParams pageParams);
     }
 }

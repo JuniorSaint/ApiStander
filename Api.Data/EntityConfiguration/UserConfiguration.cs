@@ -10,7 +10,7 @@ namespace Api.Data.EntityConfiguration
         public void Configure(EntityTypeBuilder<UserEntity> builder)
         {
             builder.HasKey(u => u.Id);
-            builder.Property(u => u.UserName).IsRequired().HasMaxLength(20);
+            builder.Property(u => u.UserName).IsRequired().HasMaxLength(50);
             builder.Property(u => u.UserEmail).IsRequired().HasMaxLength(60);
             builder.Property(u => u.UserImage).HasMaxLength(20);
             builder.Property(u => u.UserType).IsRequired().HasMaxLength(20);

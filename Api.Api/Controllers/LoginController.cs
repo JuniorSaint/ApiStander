@@ -17,7 +17,7 @@ namespace Api.Api.Controllers
 
             if (loginDto == null)
             {
-                return BadRequest();
+                return BadRequest("Login com campos inco");
             }
 
             try
@@ -29,7 +29,7 @@ namespace Api.Api.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return StatusCode(401);
                 }
             }
             catch (ArgumentException ex)

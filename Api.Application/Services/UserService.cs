@@ -21,16 +21,24 @@ namespace Api.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<UserDto> Post(UserCreateDto usuario)
+        public async Task<UserDto> Post(UserCreateDto user)
         {
-            var entity = _mapper.Map<UserEntity>(usuario);
+            // criptography password
+            var passwordHasher = new PasswordHasher<UserCreateDto>();
+            user.Password = passwordHasher.HashPassword(user, user.Password);
+
+            var entity = _mapper.Map<UserEntity>(user);
             var result = await _repository.InsertAsync(entity);
             return _mapper.Map<UserDto>(result);
         }
 
-        public async Task<UserUpdateResultDto> Put(UserUpdateDto usuario)
+        public async Task<UserUpdateResultDto> Put(UserUpdateDto user)
         {
-            var entity = _mapper.Map<UserEntity>(usuario);
+            // criptography password
+            var passwordHasher = new PasswordHasher<UserUpdateDto>();
+            user.Password = passwordHasher.HashPassword(user, user.Password);
+
+            var entity = _mapper.Map<UserEntity>(user);
             var result = await _repository.UpdateAsync(entity);
             return _mapper.Map<UserUpdateResultDto>(result);
         }
@@ -46,24 +54,9 @@ namespace Api.Application.Services
             return _mapper.Map<UserDto>(result);
         }
 
-
         public Task<bool> PatchPassword(UserPasswordUpdateDto user)
         {
             throw new NotImplementedException();
-        }
-
-        public async Task<SignInResult> CheckUserPasswordAsync(LoginDto loginDto)
-        {
-            try
-            {
-                //var user = await _userManager.Users.SingleOrDefaultAsync(user => user.Email.ToLower() == loginDto.Email.ToLower() && user.IsActive == Domain.Enum.IsActive.yes);
-                //return await _signIn.CheckPasswordSignInAsync(user, loginDto.Password, false);
-                return null;
-            }
-            catch (ArgumentException)
-            {
-                throw new Exception("Erro ao tentar verificar a senha");
-            }
         }
 
         public async Task<PageList<UserDto>> GetAllByTerm(PageParams pageParams)
@@ -80,5 +73,10 @@ namespace Api.Application.Services
             return result;
         }
 
+       public async Task<UserDto> GetByEmail(string email)
+        {
+            var result = await _repository.GetByEmail(email);
+            return _mapper.Map<UserDto>(result);
+        }
     }
 }

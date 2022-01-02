@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Api.Controllers
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class EventsController : ControllerBase
@@ -25,7 +26,6 @@ namespace Api.Api.Controllers
             _mapper = mapper;
         }
 
-
         [HttpGet("complete/{id}")]
         public async Task<ActionResult> GetAllComplete(Guid id)
         {
@@ -39,7 +39,6 @@ namespace Api.Api.Controllers
             }
         }
 
-        //   [Authorize("Bearer")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromRoute] Guid id)
         {
@@ -66,7 +65,6 @@ namespace Api.Api.Controllers
             }
         }
 
-         //[Authorize]
         [HttpGet]
         public async Task<ActionResult> GetAllByTerm([FromQuery] PageParams pageParams)
         {
@@ -84,7 +82,6 @@ namespace Api.Api.Controllers
             }
         }
 
-        // [Authorize("Bearer")]
         [HttpGet]
         [Route("{id}", Name = "GetEventWithId")]
         public async Task<ActionResult> Get([FromRoute] Guid id)
@@ -105,7 +102,6 @@ namespace Api.Api.Controllers
             }
         }
 
-        //  [Authorize("Bearer")]
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] EventCreateDto events)
         {
@@ -125,7 +121,6 @@ namespace Api.Api.Controllers
             }
         }
 
-        //   [Authorize("Bearer")]
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] EventUpdateDto events)
         {
@@ -146,7 +141,6 @@ namespace Api.Api.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
 
         //////////////////////  Updaload de imagem
         [HttpPost("updalod-image/{eventId}")]
@@ -201,4 +195,3 @@ namespace Api.Api.Controllers
         }
     }
 }
-

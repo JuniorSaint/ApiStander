@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 using Api.Application.Interfaces;
 using Api.Application.Dtos.User;
+using Microsoft.AspNetCore.Authorization;
+using Api.Domain.Pagination;
+using Api.Api.Pagination;
 
 namespace Api.Api.Controllers
 {
@@ -19,10 +22,27 @@ namespace Api.Api.Controllers
             _service = service;
         }
 
-
-        // [Authorize("Bearer")]
+        //[Authorize]
         [HttpGet]
-        [Route(template: "{id}", Name = "GetWithId")]
+        public async Task<ActionResult> GetAllByTerm([FromQuery] PageParams pageParams)
+        {
+            try
+            {
+                var result = await _service.GetAllByTerm(pageParams);
+                if (result == null) return NoContent();
+                Response.AddPagination(result.CurrentPage, result.PageSize, result.TotalCount, result.TotalPage);
+
+                return Ok(result);
+            }
+            catch (ArgumentException e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
+        //[Authorize]
+        [HttpGet]
+        [Route("{id}", Name = "GetById")]
         public async Task<ActionResult> Get([FromRoute] Guid id)
         {
             try
@@ -34,7 +54,7 @@ namespace Api.Api.Controllers
                 }
                 return Ok(await _service.GetById(id));
 
-           }
+            }
             catch (ArgumentException e)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
@@ -42,16 +62,25 @@ namespace Api.Api.Controllers
         }
 
 
-        //  [Authorize("Bearer")]
+        //  [Authorize]
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] UserCreateDto user)
         {
             try
             {
-                var result = await _service.Post(user);
-                if (result != null)
+                var resultExist = await _service.GetByEmail(user.UserEmail);
+
+                if (resultExist == null)
                 {
-                    return Created(new Uri(Url.Link("GetById", new { id = result.Id })), result);
+                    var result = await _service.Post(user);
+                    if (result != null)
+                    {
+                        return Created(new Uri(Url.Link("GetById", new { id = result.Id })), result);
+                    }
+                }
+                else
+                {
+                    return Conflict("Usuário já cadastrado");
                 }
 
                 return BadRequest();
@@ -62,7 +91,7 @@ namespace Api.Api.Controllers
             }
         }
 
-        //   [Authorize("Bearer")]
+        //   [Authorize]
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] UserUpdateDto user)
         {

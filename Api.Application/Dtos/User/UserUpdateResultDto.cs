@@ -11,6 +11,8 @@ namespace Api.Application.Dtos.User
         public string UserType { get; set; }
         public string UserImage { get; set; }
         public string Title { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime DateBirthday { get; set; }
     }
 }
 

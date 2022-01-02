@@ -34,11 +34,7 @@ namespace Api.Application.Services
                 var baseUser = await _repository.FindByLoginAsync(user.Email, user.Password);
                 if (baseUser == null)
                 {
-                    return new
-                    {
-                        authenticated = false,
-                        message = $"email: {user.Email} e/ou senha esta errado ou usuário inativo"
-                    };
+                    return null;
                 }
                 else
                 {
@@ -91,7 +87,7 @@ namespace Api.Application.Services
                 authenticated = true,
                 created = createDate.ToString("yyyy-MM-dd HH:mm:ss"),
                 expiration = expirationDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                accessToken = token,
+                token = token,
                 message = "Usuário Logado com sucesso"
             };
         }
