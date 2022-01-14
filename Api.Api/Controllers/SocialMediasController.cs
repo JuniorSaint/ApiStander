@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Api.Controllers
 {
-	[Route("api/v1/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
-	public class SocialMediasController : ControllerBase
-	{
-		private ISocialMediaService _service;
-		private readonly IMapper _mapper;
+    public class SocialMediasController : ControllerBase
+    {
+        private ISocialMediaService _service;
+        private readonly IMapper _mapper;
 
-		public SocialMediasController(ISocialMediaService service, IMapper mapper)
+        public SocialMediasController(ISocialMediaService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
@@ -40,7 +40,7 @@ namespace Api.Api.Controllers
         {
             try
             {
-                var result = await _service.SaveLotsAsync(socialMedias, idSpeaker);
+                var result = await _service.SaveSocialMediasAsync(socialMedias, idSpeaker);
                 if (result != null)
                 {
                     return Ok(result);

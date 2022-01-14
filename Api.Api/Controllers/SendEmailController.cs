@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Api.Application.Dtos.Email;
 using Api.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Event.Api.Controllers
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class SendEmailController : ControllerBase

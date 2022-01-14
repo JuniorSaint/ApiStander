@@ -2,7 +2,7 @@
 
 namespace Api.Domain.Entities
 {
-    public class BaseEntities
+    public  class BaseEntities
     {
 
         public Guid Id { get; set; }

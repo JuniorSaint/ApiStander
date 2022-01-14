@@ -37,7 +37,7 @@ namespace Api.Application.Services
             return _mapper.Map<IEnumerable<SocialMediaDto>>(result);
         }
 
-        public async Task<IEnumerable<SocialMediaDto>> SaveLotsAsync(IEnumerable<SocialMediaDto> socialMedia, Guid idSpeaker)
+        public async Task<IEnumerable<SocialMediaDto>> SaveSocialMediasAsync(IEnumerable<SocialMediaDto> socialMedia, Guid idSpeaker)
         {
             var entity = _mapper.Map<IEnumerable<SocialMediaEntity>>(socialMedia);
             var result = await _repository.SaveSocialMediaAsync(entity, idSpeaker);

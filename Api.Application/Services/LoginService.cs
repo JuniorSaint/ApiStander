@@ -54,7 +54,7 @@ namespace Api.Application.Services
                     var credentials = new SigningCredentials(privateKey, SecurityAlgorithms.HmacSha256);
 
                     //Define time to expire
-                    var expiration = DateTime.UtcNow.AddMinutes(2);
+                    var expiration = DateTime.UtcNow.AddMinutes(100);
 
                     //Generate the Token
                     JwtSecurityToken token = new JwtSecurityToken(
@@ -71,7 +71,7 @@ namespace Api.Application.Services
                         );
                     var Token = new JwtSecurityTokenHandler().WriteToken(token);
 
-                    return SuccessObject(DateTime.UtcNow, expiration, Token);
+                    return SuccessObject(DateTime.UtcNow, expiration, Token, result);
                 }
             }
             else
@@ -80,7 +80,7 @@ namespace Api.Application.Services
             }
         }
 
-        private object SuccessObject(DateTime createDate, DateTime expirationDate, string token)
+        private object SuccessObject(DateTime createDate, DateTime expirationDate, string token, UserDto result)
         {
             return new
             {
@@ -88,7 +88,8 @@ namespace Api.Application.Services
                 created = createDate.ToString("yyyy-MM-dd HH:mm:ss"),
                 expiration = expirationDate.ToString("yyyy-MM-dd HH:mm:ss"),
                 token = token,
-                message = "Usuário Logado com sucesso"
+                message = "Usuário Logado com sucesso",
+                userName = result.UserName
             };
         }
     }

@@ -45,6 +45,9 @@ app.UseStatusCodePages();
 
 app.UseRouting();
 
+// fix the problem with date to postgres
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 // The configuration of the "Cors" must stay after: app.UseHttpsRedirection
 // and app.UseRouting and before app.UseEndpoints
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin() );

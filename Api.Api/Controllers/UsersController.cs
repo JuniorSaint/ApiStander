@@ -22,7 +22,7 @@ namespace Api.Api.Controllers
             _service = service;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult> GetAllByTerm([FromQuery] PageParams pageParams)
         {
@@ -40,7 +40,7 @@ namespace Api.Api.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         [Route("{id}", Name = "GetById")]
         public async Task<ActionResult> Get([FromRoute] Guid id)
@@ -62,7 +62,7 @@ namespace Api.Api.Controllers
         }
 
 
-        //  [Authorize]
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] UserCreateDto user)
         {
@@ -91,7 +91,7 @@ namespace Api.Api.Controllers
             }
         }
 
-        //   [Authorize]
+        [Authorize]
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] UserUpdateDto user)
         {
@@ -113,7 +113,7 @@ namespace Api.Api.Controllers
             }
         }
 
-        //   [Authorize("Bearer")]
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromRoute] Guid id)
         {

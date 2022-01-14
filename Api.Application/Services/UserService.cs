@@ -23,22 +23,22 @@ namespace Api.Application.Services
 
         public async Task<UserDto> Post(UserCreateDto user)
         {
-            // criptography password
+            // cryptography password
             var passwordHasher = new PasswordHasher<UserCreateDto>();
             user.Password = passwordHasher.HashPassword(user, user.Password);
 
-            var entity = _mapper.Map<UserEntity>(user);
+            var entity = _mapper.Map<Domain.Entities.UserEntity>(user);
             var result = await _repository.InsertAsync(entity);
             return _mapper.Map<UserDto>(result);
         }
 
         public async Task<UserUpdateResultDto> Put(UserUpdateDto user)
         {
-            // criptography password
+            // cryptography password
             var passwordHasher = new PasswordHasher<UserUpdateDto>();
             user.Password = passwordHasher.HashPassword(user, user.Password);
 
-            var entity = _mapper.Map<UserEntity>(user);
+            var entity = _mapper.Map<Domain.Entities.UserEntity>(user);
             var result = await _repository.UpdateAsync(entity);
             return _mapper.Map<UserUpdateResultDto>(result);
         }

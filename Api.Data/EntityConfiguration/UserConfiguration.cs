@@ -1,5 +1,5 @@
-﻿using System;
-using Api.Domain.Entities;
+﻿using Api.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,7 +11,7 @@ namespace Api.Data.EntityConfiguration
         {
             builder.HasKey(u => u.Id);
             builder.Property(u => u.UserName).IsRequired().HasMaxLength(50);
-            builder.Property(u => u.UserEmail).IsRequired().HasMaxLength(60);
+            builder.HasIndex(u => u.UserEmail).IsUnique();
             builder.Property(u => u.UserImage).HasMaxLength(20);
             builder.Property(u => u.UserType).IsRequired().HasMaxLength(20);
 
@@ -24,9 +24,16 @@ namespace Api.Data.EntityConfiguration
                     UserImage = "rosto.jpg",
                     IsActive = true,
                     Title = "Tecnologo",
-                    Password = "123456",
-                    UserType = "Admin"
+                    Password = NewMethod(),
+                    UserType = "Admin",
                 });
+        }
+
+        private static string NewMethod()
+        {
+            //var passwordHasher = new PasswordHasher<UserEntity>();
+            //return passwordHasher.HashPassword(UserEntity as user, "123456");
+            return null;
         }
     }
 }

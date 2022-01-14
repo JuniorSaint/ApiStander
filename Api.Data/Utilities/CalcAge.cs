@@ -1,4 +1,6 @@
 ﻿using System;
+using Api.Domain.Exceptions;
+
 namespace Api.Data.Utilities
 {
     public class CalcAge
@@ -18,6 +20,8 @@ namespace Api.Data.Utilities
             var dayBirth = _enterDate.Day;
             var nowDay = now.Day;
             var result = 0;
+
+
 
             if (now <= _enterDate) return result;
 

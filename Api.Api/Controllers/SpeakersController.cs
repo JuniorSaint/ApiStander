@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Api.Application.Dtos.Speaker;
 using Api.Application.Interfaces;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Api.Controllers
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class SpeakersController : ControllerBase
